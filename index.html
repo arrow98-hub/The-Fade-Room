@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Fade Room — Fine Barbering · Auburndale, FL</title>
+<meta name="description" content="The Fade Room — premium barbershop in Auburndale, FL. Haircuts, beard trims, full service and kid's cuts. Book your barber today.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN TOKENS — Modern Gentleman's Club / Speakeasy
+═══════════════════════════════════════════════════════════════ */
+:root {
+  --black: #0D0B08;
+  --charcoal: #161209;
+  --charcoal-2: #1B160E;
+  --charcoal-3: #2A2013;
+  --off-white: #F1E6CE;
+  --off-white-dim: rgba(241, 230, 206, 0.72);
+  --off-white-muted: rgba(241, 230, 206, 0.45);
+  --gold: #C9A24B;
+  --gold-light: #E3C077;
+  --gold-bright: #E3C077;
+  --bronze: #7A5636;
+  --copper: #B8863C;
+  --border: rgba(201, 162, 75, 0.16);
+  --border-strong: rgba(201, 162, 75, 0.4);
+  --glass: rgba(13, 11, 8, 0.88);
+  --radius: 3px;
+  --nav-h: 72px;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.3s ease-in-out;
+}
+
+[data-theme="light"] {
+  --black: #FAF7F0;
+  --charcoal: #F1E9D6;
+  --charcoal-2: #FFFFFF;
+  --charcoal-3: #F1E4C8;
+  --off-white: #221A0F;
+  --off-white-dim: rgba(34, 26, 15, 0.72);
+  --off-white-muted: rgba(34, 26, 15, 0.45);
+  --gold: #A9762E;
+  --gold-light: #C79646;
+  --gold-bright: #C79646;
+  --bronze: #8A6A3E;
+  --copper: #7C5620;
+  --border: rgba(169, 118, 46, 0.22);
+  --border-strong: rgba(169, 118, 46, 0.48);
+  --glass: rgba(250, 247, 240, 0.88);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html {
+  scroll-behavior: auto;
+  scroll-padding-top: calc(var(--nav-h) + 20px);
+}
+body {
+  font-family: var(--font-sans);
+  background: var(--black);
+  color: var(--off-white);
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+img { display: block; max-width: 100%; }
+main { display: block; }
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVBAR — Sticky + Glassmorphism on scroll
+═══════════════════════════════════════════════════════════════ */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 300;
+  height: var(--nav-h);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 clamp(20px, 4vw, 48px);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: var(--transition);
+}
+.nav-left { justify-self: start; grid-column: 1; }
+.navbar.scrolled {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom-color: var(--border);
+}
+
+/* Minimalist logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 310;
+}
+.brand-mark {
+  width: 28px; height: 28px;
+  border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.brand-mark svg { width: 14px; height: 14px; }
+.brand-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: var(--off-white);
+}
+.brand-name em { font-style: italic; color: var(--gold); }
+
+/* Desktop nav links — truly centered on viewport */
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: clamp(24px, 3vw, 40px);
+  list-style: none;
+  justify-self: center;
+  grid-column: 2;
+}
+@media (min-width: 900px) { .nav-links { display: flex; } }
+.nav-link {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--off-white-dim);
+  transition: var(--transition);
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s var(--ease);
+}
+.nav-link:hover { color: var(--gold); }
+.nav-link:hover::after { width: 100%; }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 310;
+  justify-self: end;
+  grid-column: 3;
+}
+
+/* Utility buttons — compact icon pills */
+.nav-btn {
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  padding: 8px 10px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--off-white-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.nav-btn:hover {
+  color: var(--gold);
+  border-color: var(--border-strong);
+}
+.nav-btn-label { display: none; }
+@media (min-width: 1200px) {
+  .nav-btn { padding: 8px 12px; }
+  .nav-btn-label { display: inline; }
+}
+
+/* Book CTA — solid with hover inversion */
+.btn-nav-book {
+  display: none;
+  padding: 9px 16px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--black);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+@media (min-width: 640px) { .btn-nav-book { display: inline-flex; } }
+.btn-nav-book:hover {
+  background: transparent;
+  color: var(--gold);
+}
+.btn-nav-book-short { display: none; }
+@media (min-width: 900px) and (max-width: 1140px) {
+  .btn-nav-book-full { display: none; }
+  .btn-nav-book-short { display: inline; }
+}
+
+/* Hamburger */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px; height: 32px;
+  padding: 4px;
+  z-index: 310;
+}
+@media (min-width: 900px) { .hamburger { display: none; } }
+.hamburger span {
+  display: block;
+  width: 100%; height: 1px;
+  background: var(--off-white);
+  transition: var(--transition);
+  transform-origin: center;
+}
+.hamburger.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Full-screen mobile menu */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 290;
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s var(--ease), visibility 0.4s;
+}
+.mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+.mobile-menu-link {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 10vw, 64px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--off-white-muted);
+  letter-spacing: -1px;
+  transition: var(--transition);
+  transform: translateY(20px);
+  opacity: 0;
+}
+.mobile-menu.open .mobile-menu-link {
+  transform: translateY(0);
+  opacity: 1;
+}
+.mobile-menu.open .mobile-menu-link:nth-child(1) { transition-delay: 0.05s; }
+.mobile-menu.open .mobile-menu-link:nth-child(2) { transition-delay: 0.10s; }
+.mobile-menu.open .mobile-menu-link:nth-child(3) { transition-delay: 0.15s; }
+.mobile-menu.open .mobile-menu-link:nth-child(4) { transition-delay: 0.20s; }
+.mobile-menu.open .mobile-menu-link:nth-child(5) { transition-delay: 0.25s; }
+.mobile-menu-link:hover { color: var(--gold); }
+.mobile-menu-link em { color: var(--gold); font-style: italic; }
+.mobile-menu-footer {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  gap: 16px;
+}
+.mobile-menu-footer .nav-btn { font-size: 11px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO — Cinematic video + fade-up reveal
+═══════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-video-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-video-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(10,10,10,0.55) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.88) 50%, rgba(10,10,10,0.95) 100%);
+}
+.hero-video-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+}
+.hero-video { width: 100%; height: 100%; object-fit: cover; }
+.hero-video-fallback {
+  position: absolute;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+  display: none;
+} /* <--- Esta es la llave que faltaba para cerrar el fallback */
+
+/* Ahora sí, la regla del espejo va de forma independiente: */
+@media (max-width: 768px) {
+  .hero-video {
+    transform: scaleX(-1);
+  }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 80px) clamp(24px, 5vw, 48px) 100px;
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease) 0.2s forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--gold);
+}
+
+.hero-h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(56px, 11vw, 110px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -2px;
+  color: #F1E6CE;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 0.4s forwards;
+}
+.hero-h1 em { font-style: italic; color: var(--gold); }
+
+.hero-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: #F1E6CE;
+  line-height: 1.85;
+  max-width: 440px;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--ease) 0.65s forwards;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--ease) 0.85s forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  border-radius: var(--radius);
+  background: var(--gold);
+  color: var(--black);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  border: 1px solid var(--gold);
+  transition: var(--transition);
+}
+.btn-primary:hover {
+  background: transparent;
+  color: var(--gold);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  border-radius: var(--radius);
+  background: transparent;
+  color: #F1E6CE;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  border: 1px solid var(--border-strong);
+  transition: var(--transition);
+}
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* Scroll cue — v5 pulse + double-chevron bounce */
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--gold);
+  padding: 8px 16px;
+  font-family: inherit;
+}
+/* 1. Ajuste general del bloque para que no choque en móviles */
+@media (max-width: 768px) {
+  .hero-scroll {
+    bottom: calc(15px + env(safe-area-inset-bottom)); 
+  }
+}
+
+/* 2. Ocultar la línea vertical en CUALQUIER teléfono */
+@media (max-width: 768px) {
+  .scroll-track {
+    display: none !important;
+  }
+}
+.hero-scroll span {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.5;
+}
+.scroll-track {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.scroll-chevron {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  animation: scrollBounce 1.6s ease-in-out infinite;
+  margin-top: 2px;
+  color: var(--gold);
+}
+.scroll-chevron svg {
+  width: 16px;
+  height: 9px;
+  opacity: 0.7;
+}
+.scroll-chevron svg:nth-child(2) {
+  opacity: 0.4;
+  margin-top: -3px;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHARED SECTION SHELL
+═══════════════════════════════════════════════════════════════ */
+.section {
+  padding: clamp(72px, 10vw, 120px) clamp(24px, 5vw, 48px);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.section-head {
+  text-align: center;
+  margin-bottom: clamp(48px, 6vw, 72px);
+}
+.section-tag {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 16px;
+  display: block;
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 5.5vw, 58px);
+  font-weight: 300;
+  color: var(--off-white);
+  letter-spacing: -0.5px;
+  line-height: 1.05;
+}
+.section-title em { font-style: italic; color: var(--gold); }
+.section-sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--off-white-dim);
+  max-width: 480px;
+  margin: 18px auto 0;
+  line-height: 1.8;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px auto 0;
+  max-width: 200px;
+}
+.divider-line { flex: 1; height: 1px; background: var(--border-strong); }
+.divider-dot { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.16s; }
+.reveal-d3 { transition-delay: 0.24s; }
+.reveal-d4 { transition-delay: 0.32s; }
+
+/* ═══════════════════════════════════════════════════════════════
+   BARBER TEAM — Editorial magazine cards
+═══════════════════════════════════════════════════════════════ */
+.team-section { background: var(--charcoal); }
+
+.barbers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+@media (min-width: 768px) { .barbers-grid { grid-template-columns: repeat(4, 1fr); gap: 2px; } }
+@media (max-width: 480px) { .barbers-grid { grid-template-columns: 1fr; } }
+
+.barber-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--charcoal-2);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+.barber-card:hover { border-color: var(--border-strong); }
+
+.barber-photo-wrap {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+.barber-photo {
+  width: 100%;
+  height: 100%;
+  background: var(--charcoal-3) center/cover no-repeat;
+  filter: grayscale(100%) contrast(1.15);
+  transition: filter 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.barber-card:hover .barber-photo {
+  filter: grayscale(0%) contrast(1);
+  transform: scale(1.06);
+}
+
+/* Hover overlay with Book button */
+.barber-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, transparent 55%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 24px;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+.barber-card:hover .barber-overlay { opacity: 1; }
+
+.btn-book {
+  padding: 12px 28px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--black);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  transform: translateY(12px);
+  opacity: 0;
+  transition: var(--transition);
+}
+.barber-card:hover .btn-book {
+  transform: translateY(0);
+  opacity: 1;
+}
+.btn-book:hover {
+  background: transparent;
+  color: var(--gold);
+}
+
+.barber-body {
+  padding: 20px 18px 22px;
+  border-top: 1px solid var(--border);
+}
+.barber-name {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--off-white);
+  margin-bottom: 4px;
+}
+.barber-spec {
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 10px;
+  display: block;
+}
+.barber-desc {
+  font-size: 12px;
+  color: var(--off-white-muted);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SERVICES — printed-menu layout (v7), scoped to #services
+═══════════════════════════════════════════════════════════════ */
+#services .services-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 12px 8px 8px;
+}
+
+#services .svc-plate {
+  position: relative;
+  padding: 12px 8px;
+  background: var(--charcoal-2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.35), 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+#services .svc-plate::before,
+#services .svc-plate::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--gold);
+  opacity: 0.6;
+  pointer-events: none;
+}
+#services .svc-plate::before {
+  top: -1px; left: -1px;
+  border-right: none; border-bottom: none;
+  border-top-left-radius: 6px;
+}
+#services .svc-plate::after {
+  bottom: -1px; right: -1px;
+  border-left: none; border-top: none;
+  border-bottom-right-radius: 6px;
+}
+/* Elimina o comenta este bloque en el CSS */
+#services .svc-plate::before,
+#services .svc-plate::after {
+  display: none; /* O borra completamente la regla */
+}
+
+#services .menu-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.25s ease;
+}
+#services .menu-row:last-child { border-bottom: none; }
+#services .menu-row:hover { background: var(--charcoal-3); }
+
+#services .menu-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--charcoal-3);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  box-sizing: border-box;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+#services .menu-row:hover .menu-icon {
+  background: var(--gold);
+  transform: scale(1.06);
+}
+
+#services .service-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
+[data-theme="dark"] #services .service-icon {
+  filter: brightness(0) saturate(100%) invert(72%) sepia(38%) saturate(520%) hue-rotate(5deg) brightness(98%);
+}
+[data-theme="light"] #services .service-icon {
+  filter: brightness(0) saturate(100%) invert(33%) sepia(45%) saturate(620%) hue-rotate(12deg) brightness(90%);
+}
+#services .menu-row:hover .service-icon {
+  filter: brightness(0) invert(1) !important;
+}
+
+#services .svc-menu-info { flex: 1; min-width: 0; }
+#services .svc-menu-top {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+#services .menu-name {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--off-white);
+  white-space: nowrap;
+}
+#services .svc-menu-rule {
+  flex: 1;
+  height: 1px;
+  margin-bottom: 6px;
+  min-width: 24px;
+  background-image: linear-gradient(90deg, var(--border-strong) 33%, transparent 0%);
+  background-position: bottom;
+  background-size: 6px 1px;
+  background-repeat: repeat-x;
+}
+#services .menu-price {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+#services .menu-desc {
+  font-size: 13px;
+  color: var(--off-white-muted);
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 46ch;
+}
+
+@media (max-width: 640px) {
+  #services .menu-row { padding: 18px 16px; gap: 14px; }
+  #services .menu-name { font-size: 18px; }
+  #services .menu-price { font-size: 19px; }
+  #services .menu-icon { width: 52px; height: 52px; padding: 12px; }
+  #services .service-icon { width: 26px; height: 26px; }
+}
+@media (max-width: 480px) {
+  #services .svc-plate::before,
+  #services .svc-plate::after { width: 14px; height: 14px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HOURS — Two-column grid + today indicator
+═══════════════════════════════════════════════════════════════ */
+.hours-section { background: var(--charcoal); }
+
+.hours-card { max-width: 800px; margin: 0 auto; }
+
+.hours-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+}
+@media (min-width: 560px) {
+  .hours-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.hours-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  background: var(--charcoal-2);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.hours-row:hover { border-color: var(--border-strong); }
+
+.hours-row.is-today {
+  border-color: var(--gold);
+  background: rgba(184, 149, 106, 0.06);
+}
+.hours-day-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hours-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: transparent;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.hours-row.is-today .hours-dot {
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold), 0 0 16px rgba(184,149,106,0.4);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 8px var(--gold), 0 0 16px rgba(184,149,106,0.4); }
+  50%      { box-shadow: 0 0 12px var(--gold-light), 0 0 24px rgba(184,149,106,0.6); }
+}
+
+.hours-day {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--off-white);
+  letter-spacing: 0.3px;
+}
+.hours-row.is-today .hours-day { color: var(--gold-light); }
+
+.hours-badge {
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--border-strong);
+  padding: 2px 8px;
+  font-weight: 600;
+}
+.hours-time {
+  font-size: 13px;
+  color: var(--off-white-dim);
+  font-weight: 300;
+}
+.hours-row.closed .hours-time {
+  color: #C45C5C;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.hours-row.closed { opacity: 0.55; }
+
+.hours-row.is-sunday {
+  grid-column: 1 / -1;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MAP — Dark mode filter
+═══════════════════════════════════════════════════════════════ */
+.map-section { padding: 0; }
+.map-wrap {
+  width: 100%;
+  height: 380px;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+@media (min-width: 640px) { .map-wrap { height: 440px; } }
+
+.map-wrap iframe {
+  width: 100%; height: 100%;
+  border: none;
+  display: block;
+  filter: invert(90%) hue-rotate(180deg) saturate(0.3) brightness(0.85) contrast(1.1);
+}
+[data-theme="light"] .map-wrap iframe {
+  filter: grayscale(30%) contrast(1.05);
+}
+
+.map-label {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  background: var(--charcoal-2);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 10px 22px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--off-white);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.map-label svg { width: 14px; height: 14px; color: var(--gold); flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════════════════════════
+   CONTACT — Bento-box asymmetric grid
+═══════════════════════════════════════════════════════════════ */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 2px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+@media (min-width: 640px) {
+  .bento-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+  }
+}
+
+.bento-card {
+  background: var(--charcoal-2);
+  border: 1px solid var(--border);
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  min-height: 140px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.bento-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+.bento-card:hover::before { opacity: 1; }
+
+.bento-icon {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+.bento-card:hover .bento-icon {
+  background: var(--gold);
+  color: var(--black);
+  border-color: var(--gold);
+}
+.bento-icon svg { width: 18px; height: 18px; }
+
+.bento-label {
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+.bento-value {
+  font-size: 13px;
+  color: var(--off-white-dim);
+  font-weight: 300;
+  line-height: 1.5;
+  transition: color 0.3s;
+}
+.bento-card:hover .bento-value { color: var(--off-white); }
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER — Symmetric, fine dividers
+═══════════════════════════════════════════════════════════════ */
+.footer {
+  text-align: center;
+  padding: 56px 24px 40px;
+  border-top: 1px solid var(--border);
+  background: var(--charcoal);
+}
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.footer-mark {
+  width: 26px; height: 26px;
+  border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+}
+.footer-mark svg { width: 12px; height: 12px; }
+.footer-name {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-style: italic;
+  color: var(--gold);
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.footer-link {
+  font-size: 11px;
+  color: var(--off-white-muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: var(--transition);
+}
+.footer-link:hover { color: var(--gold); }
+
+.footer-divider {
+  width: 48px; height: 1px;
+  background: var(--border-strong);
+  margin: 18px auto;
+}
+.footer-legal {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.footer-legal-link {
+  font-size: 11px;
+  color: var(--off-white-muted);
+  letter-spacing: 0.3px;
+  transition: var(--transition);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: transparent;
+}
+.footer-legal-link:hover {
+  color: var(--gold);
+  text-decoration-color: var(--gold);
+}
+.footer-copy {
+  font-size: 11px;
+  color: var(--off-white-muted);
+  letter-spacing: 0.5px;
+  font-weight: 300;
+}
+
+/* Aquí le decimos al navegador: 
+   "Si el tema es claro, pero el usuario TODAVÍA NO HA HECHO SCROLL, 
+   mantén los textos claros (dorados/blancos) sobre el video". */
+
+[data-theme="light"] .navbar:not(.scrolled) .brand-name,
+[data-theme="light"] .navbar:not(.scrolled) .nav-link,
+[data-theme="light"] .navbar:not(.scrolled) .nav-btn {
+  color: #F1E6CE; /* Letras doradas/claras para que destaquen sobre el video */
+  border-color: rgba(241, 230, 206, 0.3);
+}
+
+/* Las 3 rayitas del menú móvil (hamburguesa) también deben ser claras sobre el video */
+[data-theme="light"] .navbar:not(.scrolled) .hamburger span {
+  background: #F1E6CE;
+}
+
+/* Aquí le decimos: 
+   "Si el tema es claro y el usuario YA HIZO SCROLL (.scrolled)..." */
+
+/* 1. Cambia el fondo de la barra a un tono claro casi blanco */
+/* Se aplica únicamente en pantallas de escritorio (≥ 1024px) */
+@media (min-width: 1024px) {
+  [data-theme="light"] .navbar.scrolled {
+    background: rgba(250, 247, 240, 0.95);
+    border-bottom-color: var(--border);
+  }
+}
+
+/* 2. Cambia automáticamente el color del texto y botones a OSCURO */
+[data-theme="light"] .navbar.scrolled .brand-name,
+[data-theme="light"] .navbar.scrolled .nav-link,
+[data-theme="light"] .navbar.scrolled .nav-btn {
+  color: var(--off-white); /* En tema claro, esta variable representa el color oscuro (#221A0F) */
+  border-color: var(--border);
+}
+
+/* 3. Las rayitas del menú móvil pasan a ser oscuras para verse sobre el fondo claro */
+[data-theme="light"] .navbar.scrolled .hamburger span {
+  background: var(--off-white);
+}
+
+/* Alineación de la marca */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+/* Tamaño de la imagen del logo en el header */
+.brand-logo {
+  height: 40px; /* Ajusta la altura si lo quieres ligeramente más grande/pequeño */
+  width: auto;
+  object-fit: contain;
+}
+
+/* Control de visibilidad del logo claro y oscuro */
+.logo-light {
+  display: block;
+}
+.logo-dark {
+  display: none;
+}
+
+/* Al hacer scroll en Modo Claro, intercambia al logo oscuro */
+[data-theme="light"] .navbar.scrolled .logo-light {
+  display: none;
+}
+[data-theme="light"] .navbar.scrolled .logo-dark {
+  display: block;
+}
+
+/* Alineación de la marca en el footer */
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Tamaño de la imagen del logo en el footer */
+.footer-logo {
+  height: 40px; /* Ajusta este valor si deseas el logo del footer más grande o pequeño */
+  width: auto;
+  object-fit: contain;
+}
+
+/* Regla para cambiar al logo oscuro si el footer está en modo claro */
+[data-theme="light"] .footer .logo-light {
+  display: none;
+}
+
+[data-theme="light"] .footer .logo-dark {
+  display: block;
+}
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE & ACCESSIBILITY
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .hero-ctas { flex-direction: column; align-items: flex-start; }
+  .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+}
+@media (max-width: 380px) {
+  .nav-btn-label { display: none; }
+  .brand-name { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-eyebrow, .hero-h1, .hero-sub, .hero-ctas { animation: none; opacity: 1; }
+  .scroll-track { animation: none; }
+  .hours-dot { animation: none; }
+  .barber-photo { transition: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════ -->
+<nav class="navbar" aria-label="Main navigation">
+  <div class="nav-left">
+    <a href="#" class="brand">
+      <!-- REEMPLAZO DEL SVG POR TUS IMÁGENES -->
+      <img src="assets/logo-light.png" alt="The Fade Room" class="brand-logo logo-light">
+      <img src="assets/logo-dark.png" alt="The Fade Room" class="brand-logo logo-dark">
+      
+      <span class="brand-name">The <em>Fade</em> Room</span>
+    </a>
+  </div>
+
+  <ul class="nav-links">
+    <li><a class="nav-link" href="#team" id="nav-team">Team</a></li>
+    <li><a class="nav-link" href="#services" id="nav-svc">Services</a></li>
+    <li><a class="nav-link" href="#hours" id="nav-hours">Hours</a></li>
+    <li><a class="nav-link" href="#contact" id="nav-contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="nav-btn" onclick="toggleLang()" aria-label="Change language">
+      <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
+        <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M8 1.5C8 1.5 6 4 6 8C6 12 8 14.5 8 14.5M8 1.5C8 1.5 10 4 10 8C10 12 8 14.5 8 14.5M1.5 8H14.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      <span class="nav-btn-label" id="lang-label">ES</span>
+    </button>
+    <button class="nav-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <span id="theme-icon" aria-hidden="true">☀</span>
+      <span class="nav-btn-label" id="theme-label">Light</span>
+    </button>
+    <button class="btn-nav-book" onclick="smoothScrollTo('team')" id="nav-book-btn">
+      <span class="btn-nav-book-full" id="nav-book-text">Book an Appointment</span>
+      <span class="btn-nav-book-short" id="nav-book-text-short">Book</span>
+    </button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Full-screen mobile menu -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <a class="mobile-menu-link" href="#team" onclick="closeMobileMenu()"><em>Our</em> Team</a>
+  <a class="mobile-menu-link" href="#services" onclick="closeMobileMenu()">Services</a>
+  <a class="mobile-menu-link" href="#hours" onclick="closeMobileMenu()">Hours</a>
+  <a class="mobile-menu-link" href="#contact" onclick="closeMobileMenu()">Contact</a>
+  <a class="mobile-menu-link" href="#team" onclick="closeMobileMenu()"><em>Book</em></a>
+  <div class="mobile-menu-footer">
+    <button class="nav-btn" onclick="toggleLang()" aria-label="Change language">
+      <span id="mobile-lang-label">ES</span>
+    </button>
+    <button class="nav-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <span id="mobile-theme-label">Light</span>
+    </button>
+  </div>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-video-wrap">
+    <div class="hero-video-fallback"></div>
+    <!--
+      VIDEO PLACEHOLDER — replace src with your video
+      Recommended: compressed MP4, 1920x1080, under 8 MB
+      Free stock: https://www.pexels.com/search/videos/barbershop/
+    -->
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+  poster="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=80"
+  aria-hidden="true">
+    <source src="https://thefaderoom.ayevdigital.com/assets/video/hero-mobile.webm" type="video/webm" media="(max-width: 768px)">
+    <source src="https://thefaderoom.ayevdigital.com/assets/video/hero-desktop.webm" type="video/webm">
+    </video>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow" id="hero-eyebrow">The Fade Room · Auburndale, FL</div>
+    <h1 class="hero-h1" id="hero-title">
+      The Art<br>of the<br><em>Fade.</em>
+    </h1>
+    <p class="hero-sub" id="hero-sub">
+      Precision cuts, hot towel shaves and timeless grooming — crafted by master barbers in an atmosphere built for gentlemen.
+    </p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="smoothScrollTo('team')" id="cta-book">
+        <svg viewBox="0 0 18 18" fill="none" width="16" height="16" aria-hidden="true">
+          <rect x="2" y="3" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M6 1v4M12 1v4M2 8h14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <span id="cta-book-text">Book an Appointment</span>
+      </button>
+      <button class="btn-secondary" onclick="smoothScrollTo('contact')" id="cta-contact">
+        <svg viewBox="0 0 18 18" fill="none" width="16" height="16" aria-hidden="true">
+          <path d="M15 3H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h3l2 2 2-2h5a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+        <span id="cta-contact-text">Contact Us</span>
+      </button>
+    </div>
+  </div>
+
+  <button class="hero-scroll" onclick="smoothScrollTo('team')" aria-label="Scroll to team section">
+    <div class="scroll-track" aria-hidden="true"></div>
+    <span id="scroll-label">Scroll</span>
+    <div class="scroll-chevron" aria-hidden="true">
+      <svg viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L8 8L15 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <svg viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L8 8L15 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </button>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     BARBER TEAM
+══════════════════════════════════════════════════════ -->
+<div class="team-section">
+<section class="section" id="team">
+  <div class="section-head reveal">
+    <span class="section-tag" id="team-tag">Our Team</span>
+    <h2 class="section-title" id="team-title">Meet your <em>barber</em></h2>
+    <p class="section-sub" id="team-sub">Each barber brings a distinct style. Choose yours and book directly.</p>
+    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+  </div>
+  <div class="barbers-grid" id="barbers-grid"></div>
+</section>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SERVICES & PRICES
+══════════════════════════════════════════════════════ -->
+<section class="section" id="services">
+  <div class="section-head reveal">
+    <span class="section-tag" id="svc-tag">Services</span>
+    <h2 class="section-title" id="svc-title">Services &amp; <em>prices</em></h2>
+    <p class="section-sub" id="svc-sub">Straightforward pricing. No surprises — just clean work, every time.</p>
+    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+  </div>
+  <div class="services-wrap reveal" id="services-list"></div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     OPENING HOURS
+══════════════════════════════════════════════════════ -->
+<div class="hours-section">
+<section class="section" id="hours">
+  <div class="section-head reveal">
+    <span class="section-tag" id="hours-tag">Schedule</span>
+    <h2 class="section-title" id="hours-title">Opening <em>Hours</em></h2>
+    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+  </div>
+  <div class="hours-card reveal" id="hours-list"></div>
+</section>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     MAP
+══════════════════════════════════════════════════════ -->
+<div class="map-section" id="location">
+  <div class="map-wrap">
+    <!--
+      MAP PLACEHOLDER — replace iframe src with your Google Maps embed
+      How to get it:
+        1. Go to maps.google.com and search "The Fade Room Auburndale FL"
+        2. Click "Share" → "Embed a map"
+        3. Copy the full iframe src and paste it below
+    -->
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3519.342!2d-81.7923!3d28.0664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDAzJzU5LjAiTiA4McKwNDcnMzIuMyJX!5e0!3m2!1sen!2sus!4v1234567890"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="The Fade Room location">
+    </iframe>
+    <div class="map-label">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s8-7.58 8-13a8 8 0 1 0-16 0c0 5.42 8 13 8 13z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
+      The Fade Room · Auburndale, FL
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════════════════ -->
+<section class="section" id="contact">
+  <div class="section-head reveal">
+    <span class="section-tag" id="contact-tag">Visit Us</span>
+    <h2 class="section-title" id="contact-title">Find your <em>chair</em></h2>
+    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+  </div>
+  <div class="bento-grid reveal">
+    <a class="bento-card" href="https://maps.google.com/?q=The+Fade+Room+Auburndale+FL" target="_blank" rel="noopener">
+      <div class="bento-icon">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s8-7.58 8-13a8 8 0 1 0-16 0c0 5.42 8 13 8 13z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+      <span class="bento-label" id="lbl-location">Location</span>
+      <span class="bento-value" id="val-location">Auburndale, FL</span>
+    </a>
+    <a class="bento-card" href="https://search.google.com/local/writereview?placeid=YOUR_GOOGLE_PLACE_ID" target="_blank" rel="noopener">
+      <div class="bento-icon">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l3 6.5 7 .8-5.2 4.7L18.5 22 12 18.3 5.5 22 7.2 14l-5.2-4.7 7-.8L12 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="bento-label" id="lbl-reviews">Reviews</span>
+      <span class="bento-value" id="val-reviews">Google Reviews</span>
+    </a>
+    <a class="bento-card" href="tel:+15550000000">
+      <div class="bento-icon">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6.4 6.4l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="bento-label" id="lbl-phone">Phone</span>
+      <span class="bento-value" id="val-phone">+1 (555) 000-0000</span>
+    </a>
+    <a class="bento-card" href="mailto:hello@thefaderoom.com">
+      <div class="bento-icon">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <span class="bento-label" id="lbl-email">Email</span>
+      <span class="bento-value" id="val-email">hello@thefaderoom.com</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-brand">
+    <!-- Reemplazamos el <div class="footer-mark"> por los logos -->
+    <img src="assets/logo-light.png" alt="The Fade Room" class="footer-logo logo-light">
+    <img src="assets/logo-dark.png" alt="The Fade Room" class="footer-logo logo-dark">
+    
+    <span class="footer-name">The Fade Room</span>
+  </div>
+
+  <div class="footer-links">
+    <a class="footer-link" href="#team" id="fl-team">Team</a>
+    <a class="footer-link" href="#services" id="fl-svc">Services</a>
+    <a class="footer-link" href="#hours" id="fl-hours">Hours</a>
+    <a class="footer-link" href="#contact" id="fl-contact">Contact</a>
+  </div>
+
+  <div class="footer-divider"></div>
+  <div class="footer-legal">
+    <a class="footer-legal-link" href="privacy.html" id="fl-privacy">Privacy Policy</a>
+    <a class="footer-legal-link" href="terms.html" id="fl-terms">Terms of Service</a>
+    <a class="footer-legal-link" href="terms.html#accessibility" id="fl-access">Accessibility</a>
+  </div>
+
+  <div class="footer-copy" id="footer-copy">© 2026 The Fade Room — Fine Barbering · Auburndale, FL. All rights reserved.</div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════ -->
+<script>
+/* ═══════════════════════════════════════════════════════════
+   CONFIG — Edit only this block
+═══════════════════════════════════════════════════════════ */
+
+const barberLinks = {
+  barber1: 'https://booking.example.com/barber1',
+  barber2: 'https://booking.example.com/barber2',
+  barber3: 'https://booking.example.com/barber3',
+  barber4: 'https://booking.example.com/barber4',
+  barber5: 'https://booking.example.com/barber5',
+  barber6: 'https://booking.example.com/barber6',
+  barber7: 'https://booking.example.com/barber7',
+  barber8: 'https://booking.example.com/barber8',
+};
+
+const barbers = [
+  {
+    id:'barber1', name:'Marcus King',
+    specKey:'spec-master', descKey:'desc-master',
+    photo:'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id:'barber2', name:'Diego Romero',
+    specKey:'spec-beard', descKey:'desc-beard',
+    photo:'https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id:'barber3', name:'Ethan Cole',
+    specKey:'spec-fade', descKey:'desc-fade',
+    photo:'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id:'barber4', name:'Liam Foster',
+    specKey:'spec-classic', descKey:'desc-classic',
+    photo:'https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id:'barber5', name:'Marcus King',
+    specKey:'spec-master', descKey:'desc-master',
+    photo:'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id:'barber6', name:'Diego Romero',
+    specKey:'spec-beard', descKey:'desc-beard',
+    photo:'https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id:'barber7', name:'Ethan Cole',
+    specKey:'spec-fade', descKey:'desc-fade',
+    photo:'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id:'barber8', name:'Liam Foster',
+    specKey:'spec-classic', descKey:'desc-classic',
+    photo:'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=400&q=80',
+  },
+];
+
+const services = [
+  {
+    key:'haircut', price:'$35',
+    nameKey:'svc-haircut', descKey:'svc-haircut-desc',
+    icon: 'assets/icon-haircut.png',
+    iconAlt: 'Haircut icon',
+  },
+  {
+    key:'beard', price:'$20',
+    nameKey:'svc-beard', descKey:'svc-beard-desc',
+    icon: 'assets/icon-beard.png',
+    iconAlt: 'Beard trim icon',
+  },
+  {
+    key:'full', price:'$50',
+    nameKey:'svc-full', descKey:'svc-full-desc',
+    icon: 'assets/icon-full-service.png',
+    iconAlt: 'Full service icon',
+  },
+  {
+    key:'kids', price:'$25',
+    nameKey:'svc-kids', descKey:'svc-kids-desc',
+    icon: 'assets/icon-kids.png',
+    iconAlt: "Kid's haircut icon",
+  },
+];
+
+const hours = [
+  { dayKey:'mon', timeEN:'9:00 AM — 6:00 PM', timeES:'9:00 — 18:00', closed:false },
+  { dayKey:'tue', timeEN:'9:00 AM — 6:00 PM', timeES:'9:00 — 18:00', closed:false },
+  { dayKey:'wed', timeEN:'9:00 AM — 6:00 PM', timeES:'9:00 — 18:00', closed:false },
+  { dayKey:'thu', timeEN:'9:00 AM — 6:00 PM', timeES:'9:00 — 18:00', closed:false },
+  { dayKey:'fri', timeEN:'9:00 AM — 6:00 PM', timeES:'9:00 — 18:00', closed:false },
+  { dayKey:'sat', timeEN:'10:00 AM — 6:00 PM', timeES:'10:00 — 18:00', closed:false },
+  { dayKey:'sun', timeEN:'Closed',             timeES:'Cerrado',       closed:true  },
+];
+
+/* ═══════════════════════════════════════════════════════════
+   TRANSLATIONS
+═══════════════════════════════════════════════════════════ */
+const T = {
+  en: {
+    'lang-label':'ES','theme-label':'Light','theme-label-dark':'Light',
+    'hero-eyebrow':'The Fade Room · Auburndale, FL',
+    'hero-title':'The Art<br>of the<br><em>Fade.</em>',
+    'hero-sub':'Precision cuts, hot towel shaves and timeless grooming, crafted by master barbers in an atmosphere built for gentlemen.',
+    'cta-book-text':'Book an Appointment',
+    'cta-contact-text':'Contact Us',
+    'nav-book-text':'Book an Appointment','nav-book-text-short':'Book',
+    'scroll-label':'Scroll',
+    'team-tag':'Our Team','team-title':'Meet your <em>barber</em>',
+    'team-sub':'Each barber brings a distinct style. Choose yours and book directly.',
+    'spec-master':'Master Barber','spec-beard':'Beard Specialist',
+    'spec-fade':'Fade Expert','spec-classic':'Classic Cuts',
+    'desc-master':'Master of clean lines and skin fades. 8+ years crafting precision cuts that turn heads.',
+    'desc-beard':'Beard specialist and texture expert. Hot-towel shaves and sculpted beards are his signature.',
+    'desc-fade':'From textured crops to sharp fades, Ethan brings precision to every cut.',
+    'desc-classic':"Patient, detail-oriented and the shop's go-to for classic cuts and first-timers.",
+    'book-with':'Book with',
+    'svc-tag':'Services','svc-title':'Services &amp; <em>prices</em>',
+    'svc-sub':'Straightforward pricing. No surprises — just clean work, every time.',
+    'svc-haircut':'Haircut','svc-haircut-desc':'Classic cut, washed and styled to perfection.',
+    'svc-beard':'Beard Trim','svc-beard-desc':'Shape, trim and condition with hot towel finish.',
+    'svc-full':'Full Service','svc-full-desc':'Haircut, beard work and a complete grooming experience.',
+    'svc-kids':"Kid's Haircut",'svc-kids-desc':'Friendly cut for our youngest gentlemen (12 & under).',
+    'hours-tag':'Schedule','hours-title':'Opening <em>Hours</em>',
+    'mon':'Monday','tue':'Tuesday','wed':'Wednesday',
+    'thu':'Thursday','fri':'Friday','sat':'Saturday','sun':'Sunday',
+    'today-badge':'Today',
+    'contact-tag':'Visit Us','contact-title':'Find your <em>chair</em>',
+    'lbl-location':'Location','val-location':'Auburndale, FL',
+    'lbl-reviews':'Reviews','val-reviews':'Google Reviews',
+    'lbl-phone':'Phone','val-phone':'+1 (555) 000-0000',
+    'lbl-email':'Email','val-email':'hello@thefaderoom.com',
+    'fl-team':'Team','fl-svc':'Services','fl-hours':'Hours','fl-contact':'Contact',
+    'fl-privacy':'Privacy Policy','fl-terms':'Terms of Service','fl-access':'Accessibility',
+    'footer-copy':'© 2026 The Fade Room — Fine Barbering · Auburndale, FL. All rights reserved.',
+    'nav-team':'Team','nav-svc':'Services','nav-hours':'Hours','nav-contact':'Contact',
+  },
+  es: {
+    'lang-label':'EN','theme-label':'Claro','theme-label-dark':'Claro',
+    'hero-eyebrow':'The Fade Room · Auburndale, FL',
+    'hero-title':'El Arte<br>del<br><em>Fade.</em>',
+    'hero-sub':'Cortes de precisión, afeitados con toalla caliente y cuidado atemporal — creados por barberos maestros en un ambiente hecho para caballeros.',
+    'cta-book-text':'Reservar una Cita',
+    'cta-contact-text':'Contáctanos',
+    'nav-book-text':'Reservar una Cita','nav-book-text-short':'Reservar',
+    'scroll-label':'Ver más',
+    'team-tag':'Nuestro Equipo','team-title':'Conoce a tu <em>barbero</em>',
+    'team-sub':'Cada barbero tiene su propio estilo. Elige el tuyo y reserva directamente.',
+    'spec-master':'Barbero Maestro','spec-beard':'Especialista en Barba',
+    'spec-fade':'Experto en Fade','spec-classic':'Cortes Clásicos',
+    'desc-master':'Maestro de líneas limpias y fades al ras. Más de 8 años creando cortes de precisión.',
+    'desc-beard':'Especialista en barba y textura. Los afeitados con toalla caliente son su firma.',
+    'desc-fade':'De cortes texturizados a fades nítidos, Ethan lleva la precisión a cada corte.',
+    'desc-classic':'Paciente, detallista y el favorito de la barbería para cortes clásicos y primerizos.',
+    'book-with':'Reservar con',
+    'svc-tag':'Servicios','svc-title':'Servicios y <em>precios</em>',
+    'svc-sub':'Precios claros. Sin sorpresas — solo trabajo limpio, siempre.',
+    'svc-haircut':'Corte de Cabello','svc-haircut-desc':'Corte clásico, lavado y peinado a la perfección.',
+    'svc-beard':'Recorte de Barba','svc-beard-desc':'Forma, recorte y acondicionamiento con toalla caliente.',
+    'svc-full':'Servicio Completo','svc-full-desc':'Corte, barba y una experiencia completa de grooming.',
+    'svc-kids':'Corte para Niño','svc-kids-desc':'Corte amistoso para nuestros pequeños caballeros (12 o menos).',
+    'hours-tag':'Horario','hours-title':'Horario de <em>Atención</em>',
+    'mon':'Lunes','tue':'Martes','wed':'Miércoles',
+    'thu':'Jueves','fri':'Viernes','sat':'Sábado','sun':'Domingo',
+    'today-badge':'Hoy',
+    'contact-tag':'Visítanos','contact-title':'Encuentra tu <em>silla</em>',
+    'lbl-location':'Ubicación','val-location':'Auburndale, FL',
+    'lbl-reviews':'Reseñas','val-reviews':'Reseñas de Google',
+    'lbl-phone':'Teléfono','val-phone':'+1 (555) 000-0000',
+    'lbl-email':'Correo','val-email':'hello@thefaderoom.com',
+    'fl-team':'Equipo','fl-svc':'Servicios','fl-hours':'Horario','fl-contact':'Contacto',
+    'fl-privacy':'Política de Privacidad','fl-terms':'Términos de Servicio','fl-access':'Accesibilidad',
+    'footer-copy':'© 2026 The Fade Room — Barbería Fina · Auburndale, FL. Todos los derechos reservados.',
+    'nav-team':'Equipo','nav-svc':'Servicios','nav-hours':'Horario','nav-contact':'Contacto',
+  }
+};
+
+/* ═══════════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════════ */
+let isES   = false;
+let isDark = true;
+function t(key){ return (isES ? T.es : T.en)[key] ?? key; }
+
+/* ═══════════════════════════════════════════════════════════
+   RENDER — Barbers (editorial cards)
+═══════════════════════════════════════════════════════════ */
+function renderBarbers(){
+  const grid = document.getElementById('barbers-grid');
+  grid.innerHTML = barbers.map((b, i) => `
+    <article class="barber-card reveal reveal-d${(i % 4) + 1}">
+      <div class="barber-photo-wrap">
+        <div class="barber-photo"
+          style="background-image:url('${b.photo}')"
+          role="img" aria-label="${b.name}">
+        </div>
+        <div class="barber-overlay">
+          <button class="btn-book"
+            onclick="bookBarber('${b.id}')">
+            <span data-i18n-book>${t('book-with')}</span> ${b.name.split(' ')[0]}
+          </button>
+        </div>
+      </div>
+      <div class="barber-body">
+        <h3 class="barber-name">${b.name}</h3>
+        <span class="barber-spec" data-i18n="${b.specKey}">${t(b.specKey)}</span>
+        <p class="barber-desc" data-i18n="${b.descKey}">${t(b.descKey)}</p>
+      </div>
+    </article>
+  `).join('');
+}
+
+/* ── Render Services — printed-menu layout with icons ── */
+function renderServices(){
+  const list = document.getElementById('services-list');
+  list.innerHTML = `<div class="svc-plate">` + services.map((s, i) => `
+    <div class="menu-row reveal reveal-d${(i % 4) + 1}">
+      <div class="menu-icon">
+        <img
+          class="service-icon"
+          src="${s.icon}"
+          alt="${s.iconAlt}"
+          width="28" height="28"
+          onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="svc-menu-info">
+        <div class="svc-menu-top">
+          <span class="menu-name" data-i18n="${s.nameKey}">${t(s.nameKey)}</span>
+          <span class="svc-menu-rule" aria-hidden="true"></span>
+          <span class="menu-price">${s.price}</span>
+        </div>
+        <p class="menu-desc" data-i18n="${s.descKey}">${t(s.descKey)}</p>
+      </div>
+    </div>
+  `).join('') + `</div>`;
+}
+
+/* ── Render Hours (two-column grid + today dot) ── */
+function renderHours(){
+  const today = new Date().getDay();
+  const dayIdx = { sun:0, mon:1, tue:2, wed:3, thu:4, fri:5, sat:6 };
+  const c = document.getElementById('hours-list');
+  c.innerHTML = `
+    <div class="hours-grid">
+      ${hours.map(h => {
+        const isToday = dayIdx[h.dayKey] === today;
+        const time = isES ? h.timeES : h.timeEN;
+        return `<div class="hours-row${h.closed ? ' closed' : ''}${isToday ? ' is-today' : ''}${h.dayKey === 'sun' ? ' is-sunday' : ''}">
+          <div class="hours-day-wrap">
+            <span class="hours-dot" aria-hidden="true"></span>
+            <span class="hours-day" data-i18n="${h.dayKey}">${t(h.dayKey)}</span>
+            ${isToday ? `<span class="hours-badge" data-i18n="today-badge">${t('today-badge')}</span>` : ''}
+          </div>
+          <span class="hours-time">${time}</span>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ACTIONS
+═══════════════════════════════════════════════════════════ */
+function bookBarber(id){
+  const url = barberLinks[id];
+  if(url && !url.includes('example.com'))
+    window.open(url, '_blank', 'noopener,noreferrer');
+  else
+    alert('Booking link coming soon — contact us directly!');
+}
+
+let scrollAnimFrame = null;
+
+function easeInOutQuint(t){
+  return t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2;
+}
+
+function smoothScrollTo(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  if(scrollAnimFrame) cancelAnimationFrame(scrollAnimFrame);
+
+  const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 72;
+  const offset = navH + 20;
+  const start = window.pageYOffset;
+  const target = el.getBoundingClientRect().top + start - offset;
+  const distance = Math.abs(target - start);
+  const duration = Math.min(Math.max(distance * 0.9, 1000), 1800);
+  const t0 = performance.now();
+
+  function step(now){
+    const progress = Math.min((now - t0) / duration, 1);
+    const eased = easeInOutQuint(progress);
+    window.scrollTo(0, start + (target - start) * eased);
+    if(progress < 1){
+      scrollAnimFrame = requestAnimationFrame(step);
+    } else {
+      scrollAnimFrame = null;
+    }
+  }
+  scrollAnimFrame = requestAnimationFrame(step);
+}
+
+function initSmoothScroll(){
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      const href = anchor.getAttribute('href');
+      if(!href || href === '#') return;
+      const id = href.slice(1);
+      if(!document.getElementById(id)) return;
+      e.preventDefault();
+      if(mobileMenu.classList.contains('open')) closeMobileMenu();
+      smoothScrollTo(id);
+      history.pushState(null, '', href);
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE MENU
+═══════════════════════════════════════════════════════════ */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+
+function openMobileMenu(){
+  hamburger.classList.add('active');
+  mobileMenu.classList.add('open');
+  mobileMenu.setAttribute('aria-hidden', 'false');
+  hamburger.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileMenu(){
+  hamburger.classList.remove('active');
+  mobileMenu.classList.remove('open');
+  mobileMenu.setAttribute('aria-hidden', 'true');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu();
+});
+
+/* ═══════════════════════════════════════════════════════════
+   NAV SCROLL GLASSMORPHISM
+═══════════════════════════════════════════════════════════ */
+const navbar = document.querySelector('.navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+/* ═══════════════════════════════════════════════════════════
+   I18N
+═══════════════════════════════════════════════════════════ */
+function applyLang(){
+  const lang = isES ? T.es : T.en;
+
+  ['hero-title','team-title','svc-title','contact-title','hours-title'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el && lang[id]) el.innerHTML = lang[id];
+  });
+
+  const ids = [
+    'hero-eyebrow','hero-sub','cta-book-text','cta-contact-text','nav-book-text','nav-book-text-short','scroll-label',
+    'team-tag','team-sub','svc-tag','svc-sub','hours-tag',
+    'contact-tag','lbl-location','val-location',
+    'lbl-reviews','val-reviews','lbl-phone','val-phone','lbl-email','val-email',
+    'fl-team','fl-svc','fl-hours','fl-contact',
+    'fl-privacy','fl-terms','fl-access',
+    'footer-copy','lang-label',
+    'nav-team','nav-svc','nav-hours','nav-contact',
+  ];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    const v = lang[id];
+    if(!v) return;
+    if(/<[a-z]/i.test(v)) el.innerHTML = v; else el.textContent = v;
+  });
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if(k && lang[k] !== undefined) el.textContent = lang[k];
+  });
+  document.querySelectorAll('[data-i18n-book]').forEach(el => el.textContent = t('book-with'));
+
+  document.getElementById('theme-label').textContent =
+    isDark ? t('theme-label-dark') : t('theme-label');
+
+  const mobileLang = document.getElementById('mobile-lang-label');
+  const mobileTheme = document.getElementById('mobile-theme-label');
+  if(mobileLang) mobileLang.textContent = t('lang-label');
+  if(mobileTheme) mobileTheme.textContent = isDark ? t('theme-label-dark') : t('theme-label');
+
+  renderHours();
+  document.documentElement.lang = isES ? 'es' : 'en';
+}
+
+function toggleLang(){ isES = !isES; applyLang(); }
+
+function toggleTheme(){
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  document.getElementById('theme-icon').textContent = isDark ? '☀' : '☽';
+  document.getElementById('theme-label').textContent =
+    isDark ? t('theme-label-dark') : t('theme-label');
+  const mobileTheme = document.getElementById('mobile-theme-label');
+  if(mobileTheme) mobileTheme.textContent = isDark ? t('theme-label-dark') : t('theme-label');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════════════ */
+function initReveal(){
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
+
+function observeNewReveals(){
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
+}
+
+
+
+/* ═══════════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════════ */
+renderBarbers();
+renderServices();
+applyLang();
+initReveal();
+initSmoothScroll();
+</script>
+</body>
+</html>

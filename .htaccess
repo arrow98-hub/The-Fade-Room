@@ -1,0 +1,12 @@
+Options -MultiViews
+RewriteEngine On
+
+# Si piden /terms/ con barra, redirige a /terms (para limpiar la URL)
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Si el usuario entra a /terms, busca la carpeta y lee el index.html de adentro
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+RewriteRule ^([^/]+)$ /$1/index.html [L]
