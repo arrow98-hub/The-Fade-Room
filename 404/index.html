@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>404 — Page Not Found | The Fade Room</title>
+<meta name="description" content="The Fade Room — the page you're looking for doesn't exist or has moved.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================
+   DESIGN SYSTEM — heredado de The Fade Room (barbershop_web)
+   Paleta crema/dorado premium + modo oscuro
+   =========================================================== */
+:root{
+  --gold:#C9A84C;--gold-light:#E8C96A;--gold-pale:#F5E6C0;--gold-dim:#9B7A2F;
+  --cream:#FAF6EE;--cream-2:#F2EAD8;--text-main:#1A1611;--text-sub:#5C4F3A;
+  --text-muted:#9B8E78;--surface:#FFFFFF;--surface-2:#FAF6EE;
+  --border:rgba(201,168,76,0.25);--border-strong:rgba(201,168,76,0.5);
+  --radius:12px;--radius-lg:20px;
+  --shadow:0 4px 24px rgba(201,168,76,0.08),0 1px 4px rgba(0,0,0,0.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --gold:#D4A84B;--gold-light:#E8C96A;--gold-pale:#3D2E10;--gold-dim:#C49A3A;
+    --cream:#1A1611;--cream-2:#2A221A;--text-main:#F2E8D0;--text-sub:#C4A96E;
+    --text-muted:#7A6A50;--surface:#211C14;--surface-2:#1A1611;
+    --border:rgba(201,168,76,0.2);--border-strong:rgba(201,168,76,0.4);
+  }
+}
+:root[data-theme="dark"]{
+  --gold:#D4A84B;--gold-light:#E8C96A;--gold-pale:#3D2E10;--gold-dim:#C49A3A;
+  --cream:#1A1611;--cream-2:#2A221A;--text-main:#F2E8D0;--text-sub:#C4A96E;
+  --text-muted:#7A6A50;--surface:#211C14;--surface-2:#1A1611;
+  --border:rgba(201,168,76,0.2);--border-strong:rgba(201,168,76,0.4);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);}
+html,body{height:100%;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);color:var(--text-main);
+  min-height:100%;overflow-x:hidden;
+  transition:background .3s,color .3s;
+  line-height:1.6;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  display:flex;flex-direction:column;
+}
+a{color:inherit;text-decoration:none;}
+
+/* ===========================================================
+   NAVBAR + TOP CONTROLS (idénticos a referencia)
+   =========================================================== */
+.navbar{
+  position:sticky;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 22px;
+  background:color-mix(in srgb, var(--cream) 85%, transparent);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  transition:background .3s,border-color .3s;
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;
+  color:var(--text-main);letter-spacing:.3px;
+}
+.brand svg{width:26px;height:26px;flex-shrink:0;}
+.brand em{color:var(--gold);font-style:italic;font-weight:400;}
+.top-controls{display:flex;gap:8px;pointer-events:auto;}
+.top-btn{
+  background:var(--surface);border:1px solid var(--border-strong);
+  border-radius:50px;padding:8px 16px;
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;
+  color:var(--gold);cursor:pointer;
+  display:flex;align-items:center;gap:7px;
+  transition:all .2s;box-shadow:var(--shadow);letter-spacing:.5px;
+}
+.top-btn:hover{background:var(--gold-pale);}
+
+/* ===========================================================
+   404 HERO
+   =========================================================== */
+.error-hero{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  padding:60px 24px;max-width:1280px;margin:0 auto;width:100%;
+}
+.error-content{text-align:center;max-width:560px;}
+.studio-tag{
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);font-weight:500;margin-bottom:18px;display:inline-block;
+}
+.error-code{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(88px, 22vw, 160px);font-weight:300;line-height:1;
+  color:var(--text-main);letter-spacing:-2px;margin-bottom:6px;
+}
+.error-code em{font-style:italic;color:var(--gold);}
+.error-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(26px, 5vw, 36px);font-weight:400;
+  color:var(--text-main);margin-bottom:16px;letter-spacing:-.3px;
+}
+.error-title em{font-style:italic;color:var(--gold);}
+.divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 auto 26px;max-width:180px;}
+.divider-line{flex:1;height:1px;background:var(--border-strong);}
+.divider-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
+.error-sub{
+  font-size:15px;color:var(--text-sub);max-width:440px;margin:0 auto 36px;
+  line-height:1.75;font-weight:300;
+}
+.error-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+.error-logo{
+  display:block;width:72px;height:72px;margin:0 auto 22px;
+  object-fit:contain;
+}
+
+/* ===========================================================
+   BUTTONS (estilos heredados)
+   =========================================================== */
+.btn-primary, .btn-secondary{
+  padding:15px 30px;border-radius:50px;
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;
+  letter-spacing:2px;text-transform:uppercase;cursor:pointer;
+  transition:all .25s;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:1.5px solid transparent;
+}
+.btn-primary{background:var(--gold);color:#1A1611;border-color:var(--gold);}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.35);}
+.btn-secondary{background:transparent;color:var(--gold);border-color:var(--gold);}
+.btn-secondary:hover{background:var(--gold);color:#1A1611;transform:translateY(-2px);}
+
+/* ===========================================================
+   FOOTER
+   =========================================================== */
+.footer{
+  text-align:center;padding:32px 24px calc(28px + env(safe-area-inset-bottom,0px));
+  border-top:1px solid var(--border);
+}
+.footer-brand{
+  font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold);
+  font-style:italic;margin-bottom:6px;
+}
+.footer-copy{font-size:11px;color:var(--text-muted);letter-spacing:1px;}
+
+@media(min-width:768px){
+  .error-hero{padding:80px 32px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============== NAVBAR ============== -->
+<nav class="navbar">
+  <a href="#" class="brand" aria-label="The Fade Room" id="brand-link">
+    <img src="../assets/logo-light.png" alt="" width="26" height="26">
+    <span>The Fade <em>Room</em></span>
+  </a>
+  <div class="top-controls">
+    <button class="top-btn" onclick="toggleLang()" id="lang-btn" aria-label="Change language">
+      <svg viewBox="0 0 16 16" fill="none" width="15" height="15" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 1.5C8 1.5 6 4 6 8C6 12 8 14.5 8 14.5M8 1.5C8 1.5 10 4 10 8C10 12 8 14.5 8 14.5M1.5 8H14.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      <span id="lang-label">EN</span>
+    </button>
+    <button class="top-btn" onclick="toggleTheme()" id="theme-btn" aria-label="Toggle dark mode">
+      <span id="theme-icon">☀</span>
+      <span id="theme-label">Light</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============== 404 HERO ============== -->
+<section class="error-hero">
+  <div class="error-content">
+    <span class="studio-tag" id="studio-tag">The Fade Room</span>
+
+    <img class="error-logo" src="../assets/logo-light.png" alt="The Fade Room logo" width="72" height="72">
+
+    <h1 class="error-code">4<em>0</em>4</h1>
+    <h2 class="error-title" id="error-title">This chair is <em>empty</em></h2>
+    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+    <p class="error-sub" id="error-sub">The page you're looking for got trimmed off the map. The link may be broken or the address may have changed.</p>
+
+    <div class="error-ctas">
+      <a href="/" class="btn-primary" id="cta-home">Volver al inicio</a>
+      <a href="/#contact" class="btn-secondary" id="cta-contact">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="footer">
+  <div class="footer-brand">The Fade Room</div>
+  <div class="footer-copy" id="footer-copy">© 2026 — Fine Barbering. All rights reserved.</div>
+</footer>
+
+<script>
+/* ===========================================================
+   TRADUCCIONES (mismo patrón que el archivo de referencia)
+   =========================================================== */
+const T = {
+  en: {
+    'studio-tag':'The Fade Room',
+    'error-title':'This chair is <em>empty</em>',
+    'error-sub':"The page you're looking for got trimmed off the map. The link may be broken or the address may have changed.",
+    'cta-home':'Back to Home',
+    'cta-contact':'Contact Us',
+    'lang-label':'EN',
+    'theme-label':'Dark',
+    'theme-label-dark':'Light',
+    'footer-copy':'© 2026 — Fine Barbering. All rights reserved.'
+  },
+  es: {
+    'studio-tag':'The Fade Room',
+    'error-title':'Esta silla está <em>vacía</em>',
+    'error-sub':'La página que buscas se cortó del mapa. Puede que el enlace esté roto o que la dirección haya cambiado.',
+    'cta-home':'Volver al inicio',
+    'cta-contact':'Contáctanos',
+    'lang-label':'ES',
+    'theme-label':'Oscuro',
+    'theme-label-dark':'Claro',
+    'footer-copy':'© 2026 — Fine Barbering. Todos los derechos reservados.'
+  }
+};
+
+let isES = false;
+let isDark = true;
+
+function t(key){ return (isES ? T.es : T.en)[key] || key; }
+
+function applyLang(){
+  const ids = ['error-title','error-sub','cta-home','cta-contact','footer-copy'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    const val = t(id);
+    if(/<[a-z]/i.test(val)) el.innerHTML = val; else el.textContent = val;
+  });
+  document.getElementById('studio-tag').textContent = t('studio-tag');
+  document.getElementById('lang-label').textContent = t('lang-label');
+  document.getElementById('theme-label').textContent = isDark ? t('theme-label-dark') : t('theme-label');
+  document.documentElement.lang = isES ? 'es' : 'en';
+}
+
+function toggleLang(){ isES = !isES; applyLang(); }
+
+function toggleTheme(){
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  document.getElementById('theme-icon').textContent = isDark ? '☀' : '☽';
+  document.getElementById('theme-label').textContent = isDark ? t('theme-label-dark') : t('theme-label');
+}
+
+applyLang();
+
+if (window.location.pathname !== '/404/') {
+  window.location.replace('/404/');
+}
+</script>
+</body>
+</html>
