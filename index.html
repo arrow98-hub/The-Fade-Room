@@ -1227,7 +1227,7 @@ main { display: block; }
 ══════════════════════════════════════════════════════ -->
 <nav class="navbar" aria-label="Main navigation">
   <div class="nav-left">
-    <a href="#" class="brand">
+    <a href="/" class="brand">
       <!-- REEMPLAZO DEL SVG POR TUS IMÁGENES -->
       <img src="assets/logo-light.png" alt="The Fade Room" class="brand-logo logo-light">
       <img src="assets/logo-dark.png" alt="The Fade Room" class="brand-logo logo-dark">
@@ -1237,10 +1237,10 @@ main { display: block; }
   </div>
 
   <ul class="nav-links">
-    <li><a class="nav-link" href="#team" id="nav-team">Team</a></li>
-    <li><a class="nav-link" href="#services" id="nav-svc">Services</a></li>
-    <li><a class="nav-link" href="#hours" id="nav-hours">Hours</a></li>
-    <li><a class="nav-link" href="#contact" id="nav-contact">Contact</a></li>
+    <li><a class="nav-link" href="/?section=team" data-scroll-to="team" id="nav-team">Team</a></li>
+    <li><a class="nav-link" href="/?section=services" data-scroll-to="services" id="nav-svc">Services</a></li>
+    <li><a class="nav-link" href="/?section=hours" data-scroll-to="hours" id="nav-hours">Hours</a></li>
+    <li><a class="nav-link" href="/?section=contact" data-scroll-to="contact" id="nav-contact">Contact</a></li>
   </ul>
 
   <div class="nav-actions">
@@ -1267,11 +1267,11 @@ main { display: block; }
 
 <!-- Full-screen mobile menu -->
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-  <a class="mobile-menu-link" href="#team" onclick="closeMobileMenu()"><em>Our</em> Team</a>
-  <a class="mobile-menu-link" href="#services" onclick="closeMobileMenu()">Services</a>
-  <a class="mobile-menu-link" href="#hours" onclick="closeMobileMenu()">Hours</a>
-  <a class="mobile-menu-link" href="#contact" onclick="closeMobileMenu()">Contact</a>
-  <a class="mobile-menu-link" href="#team" onclick="closeMobileMenu()"><em>Book</em></a>
+  <a class="mobile-menu-link" href="/?section=team" data-scroll-to="team" onclick="closeMobileMenu()"><em>Our</em> Team</a>
+  <a class="mobile-menu-link" href="/?section=services" data-scroll-to="services" onclick="closeMobileMenu()">Services</a>
+  <a class="mobile-menu-link" href="/?section=hours" data-scroll-to="hours" onclick="closeMobileMenu()">Hours</a>
+  <a class="mobile-menu-link" href="/?section=contact" data-scroll-to="contact" onclick="closeMobileMenu()">Contact</a>
+  <a class="mobile-menu-link" href="/?section=team" data-scroll-to="team" onclick="closeMobileMenu()"><em>Book</em></a>
   <div class="mobile-menu-footer">
     <button class="nav-btn" onclick="toggleLang()" aria-label="Change language">
       <span id="mobile-lang-label">ES</span>
@@ -1464,17 +1464,17 @@ main { display: block; }
   </div>
 
   <div class="footer-links">
-    <a class="footer-link" href="#team" id="fl-team">Team</a>
-    <a class="footer-link" href="#services" id="fl-svc">Services</a>
-    <a class="footer-link" href="#hours" id="fl-hours">Hours</a>
-    <a class="footer-link" href="#contact" id="fl-contact">Contact</a>
+    <a class="footer-link" href="/?section=team" data-scroll-to="team" id="fl-team">Team</a>
+    <a class="footer-link" href="/?section=services" data-scroll-to="services" id="fl-svc">Services</a>
+    <a class="footer-link" href="/?section=hours" data-scroll-to="hours" id="fl-hours">Hours</a>
+    <a class="footer-link" href="/?section=contact" data-scroll-to="contact" id="fl-contact">Contact</a>
   </div>
 
   <div class="footer-divider"></div>
   <div class="footer-legal">
     <a class="footer-legal-link" href="privacy.html" id="fl-privacy">Privacy Policy</a>
     <a class="footer-legal-link" href="terms.html" id="fl-terms">Terms of Service</a>
-    <a class="footer-legal-link" href="terms.html#accessibility" id="fl-access">Accessibility</a>
+    <a class="footer-legal-link" href="/terms/" id="fl-access">Accessibility</a>
   </div>
 
   <div class="footer-copy" id="footer-copy">© 2026 The Fade Room — Fine Barbering · Auburndale, FL. All rights reserved.</div>
@@ -1789,18 +1789,23 @@ function smoothScrollTo(id){
 }
 
 function initSmoothScroll(){
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  document.querySelectorAll('a[data-scroll-to]').forEach(anchor => {
     anchor.addEventListener('click', e => {
-      const href = anchor.getAttribute('href');
-      if(!href || href === '#') return;
-      const id = href.slice(1);
+      const id = anchor.dataset.scrollTo;
       if(!document.getElementById(id)) return;
       e.preventDefault();
       if(mobileMenu.classList.contains('open')) closeMobileMenu();
       smoothScrollTo(id);
-      history.pushState(null, '', href);
     });
   });
+
+  const currentUrl = new URL(window.location.href);
+  const section = currentUrl.searchParams.get('section');
+  if(section && document.getElementById(section)){
+    currentUrl.searchParams.delete('section');
+    history.replaceState(null, '', `${currentUrl.pathname}${currentUrl.search}`);
+    smoothScrollTo(section);
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
