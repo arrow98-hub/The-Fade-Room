@@ -1,6 +1,10 @@
 Options -MultiViews
 RewriteEngine On
 
+# This site is static and has no submission endpoints; reject write requests.
+RewriteCond %{REQUEST_METHOD} !^(GET|HEAD)$ [NC]
+RewriteRule ^ - [R=405,L]
+
 ErrorDocument 404 /404/index.html
 ErrorDocument 500 /500/index.html
 
