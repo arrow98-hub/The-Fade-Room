@@ -25,7 +25,11 @@
     body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--cream);color:var(--text-main);line-height:1.75;transition:background .2s,color .2s}
     a{color:var(--gold);text-underline-offset:3px}
     .navbar{position:sticky;top:0;z-index:2;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px clamp(16px,4vw,32px);background:var(--cream);border-bottom:1px solid var(--border)}
-    .brand{color:var(--text-main);font:500 20px "Cormorant Garamond",Georgia,serif;text-decoration:none}
+    .brand{display:inline-flex;align-items:center;gap:10px;color:var(--text-main);font:500 20px "Cormorant Garamond",Georgia,serif;text-decoration:none}
+    .brand-logo{display:block;height:36px;width:auto;object-fit:contain}
+    .brand-logo.logo-dark{display:none}
+    :root[data-theme="light"] .brand-logo.logo-light{display:none}
+    :root[data-theme="light"] .brand-logo.logo-dark{display:block}
     .brand em{color:var(--gold)}
     .nav-right{display:flex;align-items:center;gap:12px}
     .back-link{font-size:13px;color:var(--text-sub)}
@@ -50,7 +54,11 @@
 </head>
 <body>
   <nav class="navbar" id="site-navigation" aria-label="Site navigation">
-    <a class="brand" href="/">The Fade <em>Room</em></a>
+    <a class="brand" href="/" aria-label="The Fade Room home">
+      <img src="/assets/logo-light.png" alt="" class="brand-logo logo-light" width="40" height="40">
+      <img src="/assets/logo-dark.png" alt="" class="brand-logo logo-dark" width="40" height="40">
+      <span>The Fade <em>Room</em></span>
+    </a>
     <div class="nav-right">
       <a class="back-link" id="back-link" href="/">Back to Home</a>
       <div class="controls">
@@ -85,13 +93,13 @@
       <div data-lang="en">
         <h2>2. How information is used and shared</h2>
         <p>The site uses its content and browser-side code to display barber, service, hours, and location information and to remember the language and theme you choose. No analytics, advertising pixel, marketing automation, customer database, authentication, or messaging integration was found in the published site code.</p>
-        <p>The barber photographs and fonts used by the site are stored with the website rather than requested from remote font or image CDNs. Google Maps is not loaded automatically: the home page displays a notice and loads the map only if you select its load button. A separate Google Maps link also opens only when selected. When you choose either map action, Google may receive technical request information such as your IP address and browser headers and may process it under its own terms and privacy notice. The site does not control Google's subsequent processing or retention. The regions where Google processes data were not verified.</p>
+        <p>The barber photographs and fonts used by the site are stored with the website rather than requested from remote font or image CDNs. The home page automatically embeds Google Maps when it loads. As a result, your browser connects to Google and Google may receive technical request information such as your IP address and browser headers and process it under its own terms and privacy notice. The embedded map uses a no-referrer policy, but that does not prevent Google from receiving the request information needed to serve the map. The site does not control Google's subsequent processing or retention. The regions where Google processes data were not verified. You can avoid this map request by not visiting the home page or by blocking Google Maps through your browser or network settings; the map then will not display.</p>
         <p>No visitor-submitted information is sent to a booking, email, SMS, payment, or database provider by the site as currently implemented. A future email or phone contact channel, if the owner confirms and publishes one, would involve the visitor's chosen email or telephone provider and should be described after its actual configuration is known.</p>
       </div>
       <div data-lang="es">
         <h2>2. Uso e intercambio de información</h2>
         <p>El sitio utiliza su contenido y código ejecutado en el navegador para mostrar información de barberos, servicios, horarios y ubicación, y para recordar el idioma y el tema elegidos. No se encontró código publicado de analítica, píxeles publicitarios, automatización de marketing, base de datos de clientes, autenticación ni integración de mensajería.</p>
-        <p>Las fotografías de barberos y las fuentes utilizadas por el sitio se alojan junto con la web, no se solicitan a servidores CDN remotos de fuentes o imágenes. Google Maps no se carga automáticamente: la página principal muestra un aviso y solo carga el mapa si seleccionas el botón para mostrarlo. Un enlace independiente a Google Maps también se abre únicamente cuando lo seleccionas. Al elegir cualquiera de esas opciones, Google puede recibir información técnica de la solicitud, como la dirección IP y encabezados del navegador, y procesarla conforme a sus propios términos y aviso de privacidad. El sitio no controla el procesamiento ni la conservación posteriores de Google. No se verificaron las regiones donde Google procesa los datos.</p>
+        <p>Las fotografías de barberos y las fuentes utilizadas por el sitio se alojan junto con la web, no se solicitan a servidores CDN remotos de fuentes o imágenes. La página principal incorpora Google Maps automáticamente al cargarse. Como resultado, el navegador se conecta con Google y Google puede recibir información técnica de la solicitud, como la dirección IP y encabezados del navegador, y procesarla conforme a sus propios términos y aviso de privacidad. El mapa incorporado utiliza una política que no envía el referente, pero eso no impide que Google reciba la información necesaria para proporcionar el mapa. El sitio no controla el procesamiento ni la conservación posteriores de Google. No se verificaron las regiones donde Google procesa los datos. Puedes evitar esta solicitud al no visitar la página principal o bloquear Google Maps mediante la configuración del navegador o de la red; en ese caso, el mapa no se mostrará.</p>
         <p>En la implementación actual, el sitio no envía información proporcionada por visitantes a proveedores de reservas, correo electrónico, SMS, pagos o bases de datos. Si el propietario confirma y publica un canal futuro de correo o teléfono, este involucraría al proveedor de correo o telefonía que el visitante elija y deberá describirse una vez que se conozca su configuración real.</p>
       </div>
     </section>
@@ -100,12 +108,12 @@
       <div data-lang="en">
         <h2>3. Local storage, cookies, and tracking</h2>
         <p>The site stores two preferences in your browser's local storage: <code>siteLanguage</code> (<code>en</code> or <code>es</code>) and <code>siteTheme</code> (<code>light</code> or <code>dark</code>). These values are used only to apply your language and appearance choices on pages of this site; the site code does not send them to a server. They remain in that browser until changed or cleared. If local storage is unavailable, the site uses its default English and dark theme for that visit.</p>
-        <p>No site-set cookie, analytics script, advertising pixel, or other tracking script was found in the repository. The map is a third-party request only if you choose to load it or open Google Maps; Google's own behavior is outside the site's control. You can decline to load the embedded map or block that request in your browser.</p>
+        <p>No site-set cookie, analytics script, advertising pixel, or other tracking script was found in the repository. Visiting the home page automatically requests the embedded map from Google; Google's own behavior is outside the site's control. You can block Google Maps through your browser or network settings, in which case the map may not display.</p>
       </div>
       <div data-lang="es">
         <h2>3. Almacenamiento local, cookies y seguimiento</h2>
         <p>El sitio guarda dos preferencias en el almacenamiento local del navegador: <code>siteLanguage</code> (<code>en</code> o <code>es</code>) y <code>siteTheme</code> (<code>light</code> o <code>dark</code>). Se utilizan únicamente para aplicar las preferencias de idioma y apariencia en las páginas de este sitio; el código del sitio no las envía a un servidor. Permanecen en ese navegador hasta que se cambien o eliminen. Si el almacenamiento local no está disponible, durante esa visita se utiliza el idioma inglés y el tema oscuro predeterminados.</p>
-        <p>No se encontraron cookies establecidas por el sitio, scripts de analítica, píxeles publicitarios ni otros scripts de seguimiento en el repositorio. El mapa genera una solicitud a terceros únicamente si eliges cargarlo o abrir Google Maps; el comportamiento propio de Google está fuera del control del sitio. Puedes optar por no cargar el mapa incorporado o bloquear esa solicitud en el navegador.</p>
+        <p>No se encontraron cookies establecidas por el sitio, scripts de analítica, píxeles publicitarios ni otros scripts de seguimiento en el repositorio. Al visitar la página principal se solicita automáticamente a Google el mapa incorporado; el comportamiento propio de Google está fuera del control del sitio. Puedes bloquear Google Maps mediante la configuración del navegador o de la red, en cuyo caso el mapa podría no mostrarse.</p>
       </div>
     </section>
 

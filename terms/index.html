@@ -26,7 +26,11 @@
     body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--cream);color:var(--text-main);line-height:1.75;transition:background .2s,color .2s}
     a{color:var(--gold);text-underline-offset:3px}
     .navbar{position:sticky;top:0;z-index:2;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px clamp(16px,4vw,32px);background:var(--cream);border-bottom:1px solid var(--border)}
-    .brand{color:var(--text-main);font:500 20px "Cormorant Garamond",Georgia,serif;text-decoration:none}
+    .brand{display:inline-flex;align-items:center;gap:10px;color:var(--text-main);font:500 20px "Cormorant Garamond",Georgia,serif;text-decoration:none}
+    .brand-logo{display:block;height:36px;width:auto;object-fit:contain}
+    .brand-logo.logo-dark{display:none}
+    :root[data-theme="light"] .brand-logo.logo-light{display:none}
+    :root[data-theme="light"] .brand-logo.logo-dark{display:block}
     .brand em{color:var(--gold)}
     .nav-right{display:flex;align-items:center;gap:12px}
     .back-link{font-size:13px;color:var(--text-sub)}
@@ -52,7 +56,11 @@
 </head>
 <body>
   <nav class="navbar" id="site-navigation" aria-label="Site navigation">
-    <a class="brand" href="/">The Fade <em>Room</em></a>
+    <a class="brand" href="/" aria-label="The Fade Room home">
+      <img src="/assets/logo-light.png" alt="" class="brand-logo logo-light" width="40" height="40">
+      <img src="/assets/logo-dark.png" alt="" class="brand-logo logo-dark" width="40" height="40">
+      <span>The Fade <em>Room</em></span>
+    </a>
     <div class="nav-right">
       <a class="back-link" id="back-link" href="/">Back to Home</a>
       <div class="controls">
@@ -86,12 +94,12 @@
     <section>
       <div data-lang="en">
         <h2>2. External services and links</h2>
-        <p>The home page can load a Google Maps search only after you select the map control; its separate map link opens only when selected. Barber photographs and fonts are served from files included with this site. Google Maps remains subject to Google's own terms and privacy practices. An external link does not mean that the website operates or endorses the linked service.</p>
+        <p>The home page automatically embeds a Google Maps search when it loads. Google Maps is provided by Google and is subject to Google's own terms and privacy practices. Barber photographs and fonts are served from files included with this site. An external link does not mean that the website operates or endorses the linked service.</p>
         <p>The repository does not configure a booking provider, online payment, customer account, contact form, email or SMS service, or analytics provider. No appointment, waitlist position, payment, message, or review is confirmed or submitted through this site.</p>
       </div>
       <div data-lang="es">
         <h2>2. Servicios y enlaces externos</h2>
-        <p>La página principal puede cargar una búsqueda de Google Maps únicamente después de que selecciones el control del mapa; el enlace independiente al mapa solo se abre si lo seleccionas. Las fotografías de barberos y las fuentes se sirven desde archivos incluidos en este sitio. Google Maps sigue sujeto a sus propios términos y prácticas de privacidad. Un enlace externo no significa que el sitio opere o respalde el servicio enlazado.</p>
+        <p>La página principal incorpora automáticamente una búsqueda de Google Maps al cargarse. Google Maps es un servicio proporcionado por Google y está sujeto a sus propios términos y prácticas de privacidad. Las fotografías de barberos y las fuentes se sirven desde archivos incluidos en este sitio. Un enlace externo no significa que el sitio opere o respalde el servicio enlazado.</p>
         <p>El repositorio no configura un proveedor de reservas, pagos en línea, cuentas de clientes, formulario de contacto, servicio de correo electrónico o SMS ni proveedor de analítica. Este sitio no confirma ni envía citas, lugares en listas de espera, pagos, mensajes o reseñas.</p>
       </div>
     </section>

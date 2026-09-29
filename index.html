@@ -924,23 +924,6 @@ main { display: block; }
 [data-theme="light"] .map-wrap iframe {
   filter: grayscale(30%) contrast(1.05);
 }
-.map-wrap iframe[hidden], .map-privacy[hidden] { display: none; }
-.map-label[hidden], .map-hide[hidden] { display: none; }
-.map-privacy {
-  position:absolute;inset:0;z-index:1;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:18px;padding:24px;background:var(--charcoal-2);text-align:center;
-}
-.map-privacy p { max-width:560px;color:var(--off-white-dim);font-size:14px;line-height:1.7; }
-.map-privacy-actions { display:flex;justify-content:center;gap:12px;flex-wrap:wrap; }
-.map-action {
-  display:inline-flex;align-items:center;justify-content:center;
-  border:1px solid var(--gold);border-radius:var(--radius);padding:12px 18px;
-  background:transparent;color:var(--gold);font:500 11px var(--font-sans);
-  letter-spacing:1px;cursor:pointer;
-}
-.map-action:hover { background:var(--gold);color:var(--black); }
-.map-hide { position:absolute;top:18px;right:18px;z-index:3; }
 .map-label {
   position: absolute;
   top: 24px;
@@ -1397,20 +1380,12 @@ main { display: block; }
 ══════════════════════════════════════════════════════ -->
 <div class="map-section" id="location">
   <div class="map-wrap">
-    <div class="map-privacy" id="map-placeholder">
-      <p id="map-note">Google Maps stays unloaded until you ask to display it. When loaded, Google may receive technical request information such as your IP address and browser headers.</p>
-      <div class="map-privacy-actions">
-        <button class="map-action" type="button" id="map-load" onclick="loadGoogleMap()" aria-controls="location-map" aria-expanded="false">Load map from Google</button>
-        <a class="map-action" id="map-open" href="https://maps.google.com/?q=The+Fade+Room+Auburndale+FL" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
-      </div>
-    </div>
-    <button class="map-action map-hide" type="button" id="map-hide" onclick="hideGoogleMap()" hidden>Hide map</button>
     <iframe
-      data-src="https://www.google.com/maps?q=The+Fade+Room+Auburndale+FL&amp;output=embed"
+      src="https://www.google.com/maps?q=The+Fade+Room+Auburndale+FL&amp;output=embed"
       allowfullscreen="" loading="lazy" referrerpolicy="no-referrer"
-      title="The Fade Room location" id="location-map" hidden>
+      title="The Fade Room location" id="location-map">
     </iframe>
-    <div class="map-label" id="map-label" hidden>
+    <div class="map-label" id="map-label">
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s8-7.58 8-13a8 8 0 1 0-16 0c0 5.42 8 13 8 13z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
       <span id="map-label-text">The Fade Room · Auburndale, FL</span>
     </div>
@@ -1589,8 +1564,6 @@ const T = {
     'language-aria':'Change language','theme-aria':'Toggle light or dark theme',
     'main-navigation':'Main navigation','menu-open':'Open menu','menu-close':'Close menu',
     'scroll-aria':'Scroll to team section','map-title':'The Fade Room location',
-    'map-note':'Google Maps stays unloaded until you ask to display it. When loaded, Google may receive technical request information such as your IP address and browser headers.',
-    'map-load':'Load map from Google','map-open':'Open in Google Maps','map-hide':'Hide map',
     'map-label-text':'The Fade Room · Auburndale, FL',
     'mobile-team-link':'<em>Our</em> Team','mobile-services-link':'Services',
     'mobile-hours-link':'Hours','mobile-contact-link':'Contact','mobile-book-link':'<em>Barbers</em>',
@@ -1640,8 +1613,6 @@ const T = {
     'language-aria':'Cambiar idioma','theme-aria':'Cambiar entre tema claro y oscuro',
     'main-navigation':'Navegación principal','menu-open':'Abrir menú','menu-close':'Cerrar menú',
     'scroll-aria':'Desplazarse hasta la sección del equipo','map-title':'Ubicación de The Fade Room',
-    'map-note':'Google Maps permanece sin cargar hasta que solicites verlo. Al cargarlo, Google puede recibir información técnica como tu dirección IP y encabezados del navegador.',
-    'map-load':'Cargar mapa de Google','map-open':'Abrir en Google Maps','map-hide':'Ocultar mapa',
     'map-label-text':'The Fade Room · Auburndale, FL',
     'mobile-team-link':'<em>Nuestro</em> equipo','mobile-services-link':'Servicios',
     'mobile-hours-link':'Horario','mobile-contact-link':'Contacto','mobile-book-link':'<em>Barberos</em>',
@@ -1773,26 +1744,6 @@ function renderHours(){
 ═══════════════════════════════════════════════════════════ */
 function bookingUnavailable(){ alert(t('booking-unavailable')); }
 
-function loadGoogleMap(){
-  const map = document.getElementById('location-map');
-  map.src = map.dataset.src;
-  map.hidden = false;
-  document.getElementById('map-load').setAttribute('aria-expanded', 'true');
-  document.getElementById('map-placeholder').hidden = true;
-  document.getElementById('map-label').hidden = false;
-  document.getElementById('map-hide').hidden = false;
-}
-
-function hideGoogleMap(){
-  const map = document.getElementById('location-map');
-  map.removeAttribute('src');
-  map.hidden = true;
-  document.getElementById('map-load').setAttribute('aria-expanded', 'false');
-  document.getElementById('map-placeholder').hidden = false;
-  document.getElementById('map-label').hidden = true;
-  document.getElementById('map-hide').hidden = true;
-}
-
 let scrollAnimFrame = null;
 
 function easeInOutQuint(t){
@@ -1903,7 +1854,7 @@ function applyLang(){
     'footer-copy','lang-label',
     'nav-team','nav-svc','nav-hours','nav-contact',
     'mobile-team-link','mobile-services-link','mobile-hours-link','mobile-contact-link','mobile-book-link',
-    'map-note','map-load','map-open','map-hide','map-label-text',
+    'map-label-text',
   ];
   ids.forEach(id => {
     const el = document.getElementById(id);
