@@ -13,26 +13,23 @@
    Paleta crema/dorado premium + modo oscuro
    =========================================================== */
 :root{
-  --gold:#C9A84C;--gold-light:#E8C96A;--gold-pale:#F5E6C0;--gold-dim:#9B7A2F;
-  --cream:#FAF6EE;--cream-2:#F2EAD8;--text-main:#1A1611;--text-sub:#5C4F3A;
-  --text-muted:#9B8E78;--surface:#FFFFFF;--surface-2:#FAF6EE;
-  --border:rgba(201,168,76,0.25);--border-strong:rgba(201,168,76,0.5);
+  --black:#0D0B08;--gold:#C9A24B;--gold-light:#E3C077;--gold-bright:#E3C077;
+  --gold-pale:#2A2013;--gold-dim:#7A5636;--copper:#B8863C;
+  --cream:#0D0B08;--cream-2:#161209;--text-main:#F1E6CE;
+  --text-sub:rgba(241,230,206,0.72);--text-muted:rgba(241,230,206,0.45);
+  --surface:#1B160E;--surface-2:#161209;
+  --border:rgba(201,162,75,0.16);--border-strong:rgba(201,162,75,0.4);
   --radius:12px;--radius-lg:20px;
-  --shadow:0 4px 24px rgba(201,168,76,0.08),0 1px 4px rgba(0,0,0,0.06);
+  --shadow:0 4px 24px rgba(201,162,75,0.08),0 1px 4px rgba(0,0,0,0.06);
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --gold:#D4A84B;--gold-light:#E8C96A;--gold-pale:#3D2E10;--gold-dim:#C49A3A;
-    --cream:#1A1611;--cream-2:#2A221A;--text-main:#F2E8D0;--text-sub:#C4A96E;
-    --text-muted:#7A6A50;--surface:#211C14;--surface-2:#1A1611;
-    --border:rgba(201,168,76,0.2);--border-strong:rgba(201,168,76,0.4);
-  }
-}
-:root[data-theme="dark"]{
-  --gold:#D4A84B;--gold-light:#E8C96A;--gold-pale:#3D2E10;--gold-dim:#C49A3A;
-  --cream:#1A1611;--cream-2:#2A221A;--text-main:#F2E8D0;--text-sub:#C4A96E;
-  --text-muted:#7A6A50;--surface:#211C14;--surface-2:#1A1611;
-  --border:rgba(201,168,76,0.2);--border-strong:rgba(201,168,76,0.4);
+:root[data-theme="light"]{
+  --black:#FAF7F0;--gold:#A9762E;--gold-light:#C79646;--gold-bright:#C79646;
+  --gold-pale:#F1E4C8;--gold-dim:#8A6A3E;--copper:#7C5620;
+  --cream:#FAF7F0;--cream-2:#F1E9D6;--text-main:#221A0F;
+  --text-sub:rgba(34,26,15,0.72);--text-muted:rgba(34,26,15,0.45);
+  --surface:#FFFFFF;--surface-2:#F1E9D6;
+  --border:rgba(169,118,46,0.22);--border-strong:rgba(169,118,46,0.48);
+  --shadow:0 4px 24px rgba(169,118,46,0.08),0 1px 4px rgba(0,0,0,0.06);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -67,6 +64,10 @@ a{color:inherit;text-decoration:none;}
   font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;
   color:var(--text-main);letter-spacing:.3px;
 }
+.brand-logo{width:34px;height:34px;object-fit:contain}
+.brand-logo.logo-dark{display:none}
+:root[data-theme="light"] .brand-logo.logo-light{display:none}
+:root[data-theme="light"] .brand-logo.logo-dark{display:block}
 .brand svg{width:26px;height:26px;flex-shrink:0;}
 .brand em{color:var(--gold);font-style:italic;font-weight:400;}
 .top-controls{display:flex;gap:8px;pointer-events:auto;}
@@ -114,9 +115,14 @@ a{color:inherit;text-decoration:none;}
 .error-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
 
 .error-logo{
-  display:block;width:72px;height:72px;margin:0 auto 22px;
-  object-fit:contain;
+  position:relative;display:block;width:72px;height:72px;margin:0 auto 22px;
 }
+.error-logo img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+}
+.error-logo .logo-dark{display:none}
+:root[data-theme="light"] .error-logo .logo-light{display:none}
+:root[data-theme="light"] .error-logo .logo-dark{display:block}
 
 /* ===========================================================
    BUTTONS (estilos heredados)
@@ -128,10 +134,10 @@ a{color:inherit;text-decoration:none;}
   transition:all .25s;display:inline-flex;align-items:center;justify-content:center;gap:8px;
   border:1.5px solid transparent;
 }
-.btn-primary{background:var(--gold);color:#1A1611;border-color:var(--gold);}
+.btn-primary{background:var(--gold);color:var(--black);border-color:var(--gold);}
 .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.35);}
 .btn-secondary{background:transparent;color:var(--gold);border-color:var(--gold);}
-.btn-secondary:hover{background:var(--gold);color:#1A1611;transform:translateY(-2px);}
+.btn-secondary:hover{background:var(--gold);color:var(--black);transform:translateY(-2px);}
 
 /* ===========================================================
    FOOTER
@@ -158,7 +164,8 @@ a{color:inherit;text-decoration:none;}
 <!-- ============== NAVBAR ============== -->
 <nav class="navbar">
   <a href="/" class="brand" aria-label="The Fade Room" id="brand-link">
-    <img src="/assets/logo-light.png" alt="" width="26" height="26">
+    <img src="/assets/logo-light.png" alt="" class="brand-logo logo-light" width="34" height="34">
+    <img src="/assets/logo-dark.png" alt="" class="brand-logo logo-dark" width="34" height="34">
     <span>The Fade <em>Room</em></span>
   </a>
   <div class="top-controls">
@@ -178,7 +185,10 @@ a{color:inherit;text-decoration:none;}
   <div class="error-content">
     <span class="studio-tag" id="studio-tag">The Fade Room</span>
 
-    <img class="error-logo" src="/assets/logo-light.png" alt="The Fade Room logo" width="72" height="72">
+    <div class="error-logo" role="img" aria-label="The Fade Room logo">
+      <img src="/assets/logo-light.png" alt="" class="logo-light" width="72" height="72">
+      <img src="/assets/logo-dark.png" alt="" class="logo-dark" width="72" height="72">
+    </div>
 
     <h1 class="error-code">4<em>0</em>4</h1>
     <h2 class="error-title" id="error-title">This chair is <em>empty</em></h2>
