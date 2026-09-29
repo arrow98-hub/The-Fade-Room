@@ -1,292 +1,199 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terms of Service — The Fade Room</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --gold:#C9A84C;--gold-light:#E8C96A;--gold-pale:#F5E6C0;
-  --cream:#FAF6EE;--cream-2:#F2EAD8;--text-main:#1A1611;--text-sub:#5C4F3A;
-  --text-muted:#9B8E78;--surface:#FFFFFF;--surface-2:#FAF6EE;
-  --border:rgba(201,168,76,.25);--border-strong:rgba(201,168,76,.5);
-  --radius:12px;--radius-lg:20px;
-  --shadow:0 4px 24px rgba(201,168,76,.08),0 1px 4px rgba(0,0,0,.06);
-  --nav-h:64px;
-}
-[data-theme="dark"]{
-  --gold:#D4A84B;--gold-light:#E8C96A;--gold-pale:#3D2E10;
-  --cream:#1A1611;--cream-2:#2A221A;--text-main:#F2E8D0;--text-sub:#C4A96E;
-  --text-muted:#7A6A50;--surface:#211C14;--surface-2:#1A1611;
-  --border:rgba(201,168,76,.2);--border-strong:rgba(201,168,76,.4);
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text-main);
-  line-height:1.75;transition:background .3s,color .3s;}
-a{color:var(--gold);text-decoration:none;}
-a:hover{text-decoration:underline;text-underline-offset:3px;}
-
-.navbar{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;
-  padding:0 24px;
-  background:rgba(250,246,238,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-[data-theme="dark"] .navbar{background:rgba(26,22,17,.9);}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.brand-badge{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--gold);
-  display:flex;align-items:center;justify-content:center;background:var(--surface);}
-.brand-badge svg{width:14px;height:14px;}
-.brand-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:var(--text-main);}
-.brand-name em{font-style:italic;color:var(--gold);font-weight:400;}
-.nav-right{display:flex;align-items:center;gap:12px;}
-.back-link{font-size:12px;color:var(--text-muted);letter-spacing:.5px;
-  display:flex;align-items:center;gap:6px;transition:color .2s;}
-.back-link:hover{color:var(--gold);text-decoration:none;}
-.top-btn{
-  background:var(--surface);border:1px solid var(--border-strong);border-radius:50px;
-  padding:7px 14px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;
-  color:var(--gold);cursor:pointer;display:flex;align-items:center;gap:6px;
-  transition:all .2s;letter-spacing:.5px;
-}
-.top-btn:hover{background:var(--gold-pale);}
-
-.page{max-width:760px;margin:0 auto;padding:calc(var(--nav-h) + 56px) 24px 80px;}
-.page-eyebrow{
-  font-size:10px;letter-spacing:4px;text-transform:uppercase;
-  color:var(--gold);font-weight:500;margin-bottom:16px;
-  display:flex;align-items:center;gap:12px;
-}
-.page-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);}
-.page-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(36px,7vw,58px);font-weight:300;line-height:1.05;letter-spacing:-.5px;
-  color:var(--text-main);margin-bottom:10px;
-}
-.page-title em{font-style:italic;color:var(--gold);}
-.page-meta{font-size:12px;color:var(--text-muted);letter-spacing:.5px;margin-bottom:48px;}
-.divider{display:flex;align-items:center;gap:14px;margin:0 0 48px;max-width:160px;}
-.divider-line{flex:1;height:1px;background:var(--border-strong);}
-.divider-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
-
-.legal-section{margin-bottom:48px;}
-.legal-section h2{
-  font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;
-  color:var(--text-main);margin-bottom:16px;padding-bottom:10px;
-  border-bottom:1px solid var(--border);
-}
-.legal-section h3{font-size:15px;font-weight:500;color:var(--text-sub);margin:24px 0 8px;}
-.legal-section p{font-size:14px;color:var(--text-sub);line-height:1.8;margin-bottom:14px;}
-.legal-section ul{padding-left:20px;margin-bottom:14px;}
-.legal-section ul li{font-size:14px;color:var(--text-sub);line-height:1.8;margin-bottom:6px;}
-.legal-section ul li::marker{color:var(--gold);}
-.highlight-box{
-  background:var(--surface);border:1.5px solid var(--border);
-  border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:32px;
-  box-shadow:var(--shadow);
-}
-.highlight-box p{margin-bottom:0;font-size:13px;}
-
-/* Accessibility section */
-.access-card{
-  background:var(--surface);border:1.5px solid var(--gold-pale);
-  border-radius:var(--radius-lg);padding:28px 32px;
-  box-shadow:var(--shadow);
-}
-.access-card h3{
-  font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;
-  color:var(--text-main);margin-bottom:8px;
-}
-.access-card p{font-size:14px;color:var(--text-sub);line-height:1.8;margin-bottom:0;}
-
-.legal-footer{
-  margin-top:64px;padding-top:28px;border-top:1px solid var(--border);
-  text-align:center;
-}
-.legal-footer p{font-size:12px;color:var(--text-muted);margin-bottom:10px;}
-.legal-footer a{color:var(--gold);font-size:12px;}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terms of Service — The Fade Room</title>
+  <meta name="description" content="Terms for use of The Fade Room website.">
+  <script src="/assets/site-preferences.js"></script>
+  <link rel="stylesheet" href="/assets/fonts.css">
+  <style>
+    :root {
+      --gold:#C9A84C;--gold-light:#E8C96A;--gold-pale:#F5E6C0;
+      --cream:#FAF6EE;--text-main:#1A1611;--text-sub:#5C4F3A;
+      --text-muted:#9B8E78;--surface:#FFFFFF;--border:rgba(201,168,76,.25);
+      --border-strong:rgba(201,168,76,.5);
+    }
+    :root[data-theme="dark"] {
+      --gold:#D4A84B;--gold-light:#E8C96A;--gold-pale:#3D2E10;
+      --cream:#1A1611;--text-main:#F2E8D0;--text-sub:#C4A96E;
+      --text-muted:#7A6A50;--surface:#211C14;
+      --border:rgba(201,168,76,.2);--border-strong:rgba(201,168,76,.4);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html[lang="es"] [data-lang="en"],html:not([lang="es"]) [data-lang="es"]{display:none!important}
+    html{scroll-behavior:smooth;scroll-padding-top:80px}
+    body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--cream);color:var(--text-main);line-height:1.75;transition:background .2s,color .2s}
+    a{color:var(--gold);text-underline-offset:3px}
+    .navbar{position:sticky;top:0;z-index:2;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px clamp(16px,4vw,32px);background:var(--cream);border-bottom:1px solid var(--border)}
+    .brand{color:var(--text-main);font:500 20px "Cormorant Garamond",Georgia,serif;text-decoration:none}
+    .brand em{color:var(--gold)}
+    .nav-right{display:flex;align-items:center;gap:12px}
+    .back-link{font-size:13px;color:var(--text-sub)}
+    .controls{display:flex;gap:8px}
+    .top-btn{border:1px solid var(--border-strong);border-radius:24px;padding:8px 12px;background:var(--surface);color:var(--gold);font:500 12px Inter,system-ui,sans-serif;cursor:pointer}
+    .page{max-width:780px;margin:0 auto;padding:48px 22px 72px}
+    .eyebrow{color:var(--gold);font-size:11px;letter-spacing:3px;text-transform:uppercase}
+    h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;line-height:1.2}
+    h1{font-size:clamp(38px,8vw,58px);font-weight:400;margin:10px 0}
+    h1 em{color:var(--gold)}
+    .meta{color:var(--text-muted);font-size:12px;margin:0 0 32px}
+    .notice,.access-card{padding:18px 20px;border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--text-sub);font-size:14px}
+    section{margin:34px 0;scroll-margin-top:88px}
+    h2{font-size:25px;font-weight:500;border-bottom:1px solid var(--border);padding-bottom:8px}
+    h3{font-size:21px;font-weight:500;color:var(--text-main);margin:0 0 8px}
+    p,li{font-size:14px;color:var(--text-sub)}
+    li{margin:7px 0}
+    .pending{font-weight:600;color:var(--gold)}
+    .footer{border-top:1px solid var(--border);padding:24px 16px;text-align:center;font-size:12px;color:var(--text-muted)}
+    .footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:12px}
+    @media(max-width:560px){.navbar{flex-wrap:wrap}.nav-right{width:100%;justify-content:space-between}.page{padding-top:32px}}
+  </style>
 </head>
 <body>
-
-<nav class="navbar">
-  <a href="../" class="brand">
-    <div class="brand-badge">
-      <svg viewBox="0 0 28 28" fill="none">
-        <path d="M14 3C14 3 10 8 10 13C10 15.76 11.79 18.1 14 19C16.21 18.1 18 15.76 18 13C18 8 14 3 14 3Z" stroke="#C9A84C" stroke-width="1.4" stroke-linejoin="round"/>
-        <path d="M9 12L5 22" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/>
-        <path d="M19 12L23 22" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/>
-        <path d="M8 17H20" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
+  <nav class="navbar" id="site-navigation" aria-label="Site navigation">
+    <a class="brand" href="/">The Fade <em>Room</em></a>
+    <div class="nav-right">
+      <a class="back-link" id="back-link" href="/">Back to Home</a>
+      <div class="controls">
+        <button class="top-btn" type="button" onclick="toggleLanguage()" aria-label="Change language"><span id="language-label">ES</span></button>
+        <button class="top-btn" type="button" onclick="toggleTheme()" aria-label="Toggle light or dark theme"><span id="theme-icon">☀</span> <span id="theme-label">Light</span></button>
+      </div>
     </div>
-    <span class="brand-name">The Fade <em>Room</em></span>
-  </a>
-  <div class="nav-right">
-    <a href="../" class="back-link">
-      <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Back to Home
-    </a>
-    <button class="top-btn" onclick="toggleTheme()">
-      <span id="theme-icon">☀</span>
-      <span id="theme-label">Light</span>
-    </button>
-  </div>
-</nav>
-
-<main class="page">
-  <div class="page-eyebrow">Legal</div>
-  <h1 class="page-title">Terms of <em>Service</em></h1>
-  <p class="page-meta">Last updated: January 1, 2026 &nbsp;·&nbsp; The Fade Room, Auburndale, FL</p>
-  <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
-
-  <div class="highlight-box">
-    <p>By accessing our website, using our waitlist system, or booking an appointment at <strong>The Fade Room</strong>, you agree to be bound by these Terms of Service. Please read them carefully. If you do not agree with any part of these terms, please do not use our services.</p>
-  </div>
-
-  <!-- 1 -->
-  <div class="legal-section">
-    <h2>1. Services Provided</h2>
-    <p>The Fade Room ("the Shop," "we," "us") provides professional barbering services including haircuts, beard trims, full grooming services, and children's haircuts at our physical location in Auburndale, FL. Our website and digital tools (including the waitlist and booking system) are provided to facilitate scheduling and communication with our clients.</p>
-    <p>We reserve the right to modify, suspend, or discontinue any aspect of our services at any time without prior notice.</p>
-  </div>
-
-  <!-- 2 -->
-  <div class="legal-section">
-    <h2>2. Appointments &amp; Waitlist</h2>
-    <h3>Booking</h3>
-    <ul>
-      <li>Appointments may be booked through our website, by phone, or through third-party booking platforms linked from our site.</li>
-      <li>Booking an appointment does not guarantee immediate service; it reserves a time slot subject to barber availability.</li>
-    </ul>
-    <h3>Cancellations &amp; No-Shows</h3>
-    <ul>
-      <li>We ask that you cancel or reschedule at least <strong>2 hours</strong> before your appointment time.</li>
-      <li>Repeated no-shows (2 or more) may result in a requirement to pre-pay or may result in restricted access to online booking.</li>
-      <li>We reserve the right to cancel or reschedule appointments due to staff illness, equipment issues, or other unforeseen circumstances. We will notify you as soon as possible.</li>
-    </ul>
-    <h3>Waitlist</h3>
-    <ul>
-      <li>Joining the digital waitlist does not guarantee a spot or a specific service time on walk-in days.</li>
-      <li>Waitlist positions are managed on a first-come, first-served basis.</li>
-    </ul>
-  </div>
-
-  <!-- 3 -->
-  <div class="legal-section">
-    <h2>3. Pricing &amp; Payment</h2>
-    <ul>
-      <li>Prices listed on our website are estimates and may vary based on hair length, service complexity, or barber.</li>
-      <li>Final pricing is confirmed at the time of service.</li>
-      <li>Payment is due at the time of service. We accept cash and major credit/debit cards.</li>
-      <li>Gratuities are not included in listed prices and are left to the client's discretion.</li>
-      <li>We do not offer refunds for completed services. If you are dissatisfied, please inform your barber or the shop manager immediately so we can address the issue.</li>
-    </ul>
-  </div>
-
-  <!-- 4 -->
-  <div class="legal-section">
-    <h2>4. Client Conduct</h2>
-    <p>We strive to maintain a welcoming and respectful environment for all clients and staff. The Fade Room reserves the right to refuse service to any individual who:</p>
-    <ul>
-      <li>Is disrespectful, abusive, or threatening toward staff or other clients.</li>
-      <li>Arrives more than 15 minutes late for a scheduled appointment (we may reschedule).</li>
-      <li>Exhibits behavior that disrupts the comfort of others in the shop.</li>
-    </ul>
-    <p>Children receiving services must be accompanied by a parent or legal guardian.</p>
-  </div>
-
-  <!-- 5 -->
-  <div class="legal-section">
-    <h2>5. Website Use</h2>
-    <p>Our website is provided for informational and scheduling purposes only. You agree not to:</p>
-    <ul>
-      <li>Use the site for any unlawful purpose or in violation of any regulations.</li>
-      <li>Attempt to gain unauthorized access to any portion of the site or our systems.</li>
-      <li>Use automated tools to scrape, copy, or aggregate content from the site.</li>
-      <li>Transmit spam, malware, or any harmful content through contact forms or links on the site.</li>
-    </ul>
-  </div>
-
-  <!-- 6 -->
-  <div class="legal-section">
-    <h2>6. Intellectual Property</h2>
-    <p>All content on this website — including text, graphics, logos, images, and code — is the property of The Fade Room or its content suppliers and is protected by applicable copyright and trademark laws. You may not reproduce, distribute, or create derivative works from any content on this site without our express written permission.</p>
-  </div>
-
-  <!-- 7 -->
-  <div class="legal-section">
-    <h2>7. Limitation of Liability</h2>
-    <p>To the fullest extent permitted by law, The Fade Room shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our website or services, including but not limited to dissatisfaction with a service result, missed appointments, or data loss.</p>
-    <p>Our total liability to you for any claim arising from your use of our services shall not exceed the amount you paid for the specific service in question.</p>
-  </div>
-
-  <!-- 8 -->
-  <div class="legal-section">
-    <h2>8. Disclaimer of Warranties</h2>
-    <p>Our website and digital services are provided "as is" and "as available" without warranties of any kind, express or implied. We do not warrant that the site will be uninterrupted, error-free, or free of harmful components. We make no guarantees regarding the accuracy or completeness of any content on the site.</p>
-  </div>
-
-  <!-- 9 -->
-  <div class="legal-section">
-    <h2>9. Governing Law</h2>
-    <p>These Terms of Service are governed by and construed in accordance with the laws of the <strong>State of Florida</strong>, without regard to its conflict of law provisions. Any disputes arising under these terms shall be subject to the exclusive jurisdiction of the courts located in Polk County, Florida.</p>
-  </div>
-
-  <!-- 10 -->
-  <div class="legal-section">
-    <h2>10. Changes to These Terms</h2>
-    <p>We reserve the right to modify these Terms of Service at any time. Changes will be effective immediately upon posting to this page. The "Last updated" date at the top will reflect the most recent revision. Your continued use of our services after any changes constitutes acceptance of the updated terms.</p>
-  </div>
-
-  <!-- ACCESSIBILITY — id="accessibility" for direct linking from footer -->
-  <div class="legal-section" id="accessibility">
-    <h2>11. Accessibility Statement</h2>
-    <div class="access-card">
-      <h3>Our Commitment</h3>
-      <p>The Fade Room is committed to ensuring digital accessibility for people with disabilities. We continually work to improve the user experience for everyone, and apply relevant accessibility standards where possible.</p>
-      <p style="margin-top:14px;">Our efforts include:</p>
-      <ul style="padding-left:20px;margin-top:8px;">
-        <li>Sufficient color contrast throughout the interface (dark/light modes available).</li>
-        <li>Semantic HTML structure to support screen readers.</li>
-        <li>Keyboard navigation support for interactive elements.</li>
-        <li>Responsive design that works across device sizes.</li>
-        <li>Respect for <code>prefers-reduced-motion</code> to minimize animations for users who need it.</li>
-      </ul>
-      <p style="margin-top:14px;">If you experience any accessibility issues or need assistance, please contact us at <a href="mailto:hello@thefaderoom.com">hello@thefaderoom.com</a> and we will do our best to accommodate your needs.</p>
+  </nav>
+  <main class="page">
+    <div class="eyebrow" id="eyebrow">Terms</div>
+    <h1 id="page-title"><span data-lang="en">Terms of <em>Service</em></span><span data-lang="es">Términos del <em>servicio</em></span></h1>
+    <p class="meta" id="page-meta">Updated September 29, 2026 · The Fade Room</p>
+    <div class="notice">
+      <div data-lang="en">These terms describe the website functions found in this repository. They are not legal advice. The site's legal business identity and operational details have not been confirmed; owner-dependent information remains marked as pending.</div>
+      <div data-lang="es">Estos términos describen las funciones del sitio encontradas en este repositorio. No son asesoría legal. No se han confirmado la identidad legal del negocio ni los detalles operativos; la información que depende del propietario aparece marcada como pendiente.</div>
     </div>
-  </div>
 
-  <!-- 12 -->
-  <div class="legal-section">
-    <h2>12. Contact</h2>
-    <p>Questions about these Terms? Contact us:</p>
-    <ul>
-      <!-- ↓ Replace with your real info -->
-      <li><strong>Business:</strong> The Fade Room</li>
-      <li><strong>Address:</strong> [Your Address], Auburndale, FL</li>
-      <li><strong>Email:</strong> <a href="mailto:hello@thefaderoom.com">hello@thefaderoom.com</a></li>
-      <li><strong>Phone:</strong> <a href="tel:+15550000000">+1 (555) 000-0000</a></li>
-    </ul>
-  </div>
+    <section>
+      <div data-lang="en">
+        <h2>1. What the website provides</h2>
+        <p>This website presents information about The Fade Room, including barber profiles, listed services and prices, hours, and a location search. The information may change or be incomplete and should be verified with the business before relying on it.</p>
+        <p>The site does not currently submit appointment bookings or waitlist requests. The booking buttons move to the barber list; each barber's configured URL is an example address, and selecting a button displays a notice that online booking is not available. That action does not reserve a time, contact a barber, or confirm an appointment.</p>
+      </div>
+      <div data-lang="es">
+        <h2>1. Funciones del sitio</h2>
+        <p>Este sitio presenta información sobre The Fade Room, incluidos perfiles de barberos, servicios y precios publicados, horarios y una búsqueda de ubicación. La información puede cambiar o estar incompleta; confirma los datos con el negocio antes de basarte en ellos.</p>
+        <p>Actualmente, el sitio no envía reservas de citas ni solicitudes para una lista de espera. Los botones de reserva desplazan a la lista de barberos; la URL configurada para cada barbero es una dirección de ejemplo y, al seleccionar un botón, se muestra un aviso de que las reservas en línea no están disponibles. Esa acción no reserva un horario, no contacta a un barbero ni confirma una cita.</p>
+      </div>
+    </section>
 
-  <div class="legal-footer">
-    <p>© 2026 The Fade Room — Fine Barbering · Auburndale, FL</p>
-    <a href="../">← Back to Home</a> &nbsp;·&nbsp;
-    <a href="../privacy.html">Privacy Policy</a>
-  </div>
-</main>
+    <section>
+      <div data-lang="en">
+        <h2>2. External services and links</h2>
+        <p>The home page can load a Google Maps search only after you select the map control; its separate map link opens only when selected. Barber photographs and fonts are served from files included with this site. Google Maps remains subject to Google's own terms and privacy practices. An external link does not mean that the website operates or endorses the linked service.</p>
+        <p>The repository does not configure a booking provider, online payment, customer account, contact form, email or SMS service, or analytics provider. No appointment, waitlist position, payment, message, or review is confirmed or submitted through this site.</p>
+      </div>
+      <div data-lang="es">
+        <h2>2. Servicios y enlaces externos</h2>
+        <p>La página principal puede cargar una búsqueda de Google Maps únicamente después de que selecciones el control del mapa; el enlace independiente al mapa solo se abre si lo seleccionas. Las fotografías de barberos y las fuentes se sirven desde archivos incluidos en este sitio. Google Maps sigue sujeto a sus propios términos y prácticas de privacidad. Un enlace externo no significa que el sitio opere o respalde el servicio enlazado.</p>
+        <p>El repositorio no configura un proveedor de reservas, pagos en línea, cuentas de clientes, formulario de contacto, servicio de correo electrónico o SMS ni proveedor de analítica. Este sitio no confirma ni envía citas, lugares en listas de espera, pagos, mensajes o reseñas.</p>
+      </div>
+    </section>
 
-<script>
-let isDark = true;
-function toggleTheme(){
-  isDark = !isDark;
-  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
-  document.getElementById('theme-icon').textContent = isDark ? '☀' : '☽';
-  document.getElementById('theme-label').textContent = isDark ? 'Light' : 'Dark';
-}
-</script>
+    <section>
+      <div data-lang="en">
+        <h2>3. Appropriate use</h2>
+        <p>Use the site lawfully and do not attempt to disrupt it, bypass its controls, or interfere with other visitors. Do not treat displayed prices, schedules, staff details, or service descriptions as a confirmed offer or appointment; check them directly with the business once a verified contact method is published.</p>
+      </div>
+      <div data-lang="es">
+        <h2>3. Uso adecuado</h2>
+        <p>Utiliza el sitio de forma legal y no intentes interrumpirlo, eludir sus controles ni interferir con otras personas. No consideres que los precios, horarios, datos del personal o descripciones de servicios publicados sean una oferta confirmada o una cita; verifícalos directamente con el negocio cuando se publique un medio de contacto confirmado.</p>
+      </div>
+    </section>
+
+    <section>
+      <div data-lang="en">
+        <h2>4. Site content and availability</h2>
+        <p>The site and its content are provided for general information. The owner should confirm content rights and business details. Availability, accuracy, and uninterrupted operation are not guaranteed. Nothing here changes any rights that cannot be limited under applicable law.</p>
+      </div>
+      <div data-lang="es">
+        <h2>4. Contenido y disponibilidad del sitio</h2>
+        <p>El sitio y su contenido se ofrecen con fines informativos generales. El propietario debe confirmar los derechos sobre el contenido y los datos del negocio. No se garantiza la disponibilidad, exactitud ni operación ininterrumpida. Nada de lo aquí indicado modifica derechos que no puedan limitarse conforme a la ley aplicable.</p>
+      </div>
+    </section>
+
+    <section id="accessibility">
+      <div data-lang="en">
+        <h2>5. Accessibility statement</h2>
+        <div class="access-card">
+          <h3>Our approach</h3>
+          <p>We aim to make this website usable by as many people as possible. The pages use semantic HTML for core content and controls, include responsive layouts, provide language and theme controls, and honor reduced-motion preferences for the home-page animations. These implementation details are not an independent accessibility audit or a claim of conformance to a particular standard.</p>
+          <p>If you encounter a barrier or need information in another format, contact: <span class="pending">[PENDING: owner must provide and monitor an accessibility contact channel]</span>. No verified accessibility contact details were found in the repository.</p>
+        </div>
+      </div>
+      <div data-lang="es">
+        <h2>5. Declaración de accesibilidad</h2>
+        <div class="access-card">
+          <h3>Nuestro enfoque</h3>
+          <p>Buscamos que este sitio sea utilizable por el mayor número de personas posible. Las páginas utilizan HTML semántico para el contenido y los controles principales, diseños adaptables, controles de idioma y tema, y respetan la preferencia de movimiento reducido en las animaciones de la página principal. Estos detalles de implementación no constituyen una auditoría independiente de accesibilidad ni una afirmación de conformidad con una norma específica.</p>
+          <p>Si encuentras una barrera o necesitas información en otro formato, contacta con: <span class="pending">[PENDIENTE: el propietario debe proporcionar y supervisar un canal de contacto de accesibilidad]</span>. El repositorio no contiene datos de contacto de accesibilidad verificados.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div data-lang="en">
+        <h2>6. Changes and contact</h2>
+        <p>These terms may be updated if the site's actual functions change. The update date above reflects this revision. The legal business name, verified contact channel, business address, and any governing-law or dispute terms require owner confirmation before they can be stated here.</p>
+        <p>Questions about these terms: <span class="pending">[PENDING: owner must confirm a monitored business contact channel]</span>.</p>
+      </div>
+      <div data-lang="es">
+        <h2>6. Cambios y contacto</h2>
+        <p>Estos términos pueden actualizarse si cambian las funciones reales del sitio. La fecha anterior corresponde a esta revisión. El nombre legal del negocio, el canal de contacto verificado, la dirección comercial y cualquier condición sobre ley aplicable o disputas requieren confirmación del propietario antes de incluirse aquí.</p>
+        <p>Preguntas sobre estos términos: <span class="pending">[PENDIENTE: el propietario debe confirmar un canal de contacto comercial supervisado]</span>.</p>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <nav class="footer-links" id="footer-navigation" aria-label="Legal navigation">
+      <a href="/privacy/" id="privacy-link">Privacy Policy</a>
+      <a href="/terms/" id="terms-link">Terms of Service</a>
+      <a href="/terms/#accessibility" id="accessibility-link">Accessibility</a>
+    </nav>
+    <a href="/" id="home-link">Back to Home</a> · © 2026 The Fade Room
+  </footer>
+  <script>
+    const legalLabels = {
+      en: { title: 'Terms of Service — The Fade Room', description: 'Terms for use of The Fade Room website.', eyebrow: 'Terms', meta: 'Updated September 29, 2026 · The Fade Room', back: 'Back to Home', privacy: 'Privacy Policy', terms: 'Terms of Service', accessibility: 'Accessibility', language: 'ES', languageAria: 'Change language', theme: 'Dark', themeAria: 'Toggle light or dark theme', siteNavigation: 'Site navigation', footerNavigation: 'Legal navigation' },
+      es: { title: 'Términos del servicio — The Fade Room', description: 'Términos de uso del sitio web The Fade Room.', eyebrow: 'Términos', meta: 'Actualizado el 29 de septiembre de 2026 · The Fade Room', back: 'Volver al inicio', privacy: 'Política de privacidad', terms: 'Términos del servicio', accessibility: 'Accesibilidad', language: 'EN', languageAria: 'Cambiar idioma', theme: 'Oscuro', themeAria: 'Cambiar entre tema claro y oscuro', siteNavigation: 'Navegación del sitio', footerNavigation: 'Navegación legal' }
+    };
+    function applyLanguage() {
+      const isSpanish = SitePreferences.getLanguage() === 'es';
+      const isDark = SitePreferences.getTheme() === 'dark';
+      const labels = legalLabels[isSpanish ? 'es' : 'en'];
+      document.title = labels.title;
+      document.querySelector('meta[name="description"]').content = labels.description;
+      document.getElementById('eyebrow').textContent = labels.eyebrow;
+      document.getElementById('page-meta').textContent = labels.meta;
+      document.getElementById('back-link').textContent = labels.back;
+      document.getElementById('home-link').textContent = labels.back;
+      document.getElementById('privacy-link').textContent = labels.privacy;
+      document.getElementById('terms-link').textContent = labels.terms;
+      document.getElementById('accessibility-link').textContent = labels.accessibility;
+      document.getElementById('site-navigation').setAttribute('aria-label', labels.siteNavigation);
+      document.getElementById('footer-navigation').setAttribute('aria-label', labels.footerNavigation);
+      document.getElementById('language-label').textContent = labels.language;
+      document.getElementById('theme-label').textContent = isDark ? (isSpanish ? 'Claro' : 'Light') : (isSpanish ? 'Oscuro' : 'Dark');
+      document.getElementById('theme-icon').textContent = isDark ? '☀' : '☽';
+      document.querySelector('[onclick="toggleLanguage()"]').setAttribute('aria-label', labels.languageAria);
+      document.querySelector('[onclick="toggleTheme()"]').setAttribute('aria-label', labels.themeAria);
+    }
+    function toggleLanguage() {
+      SitePreferences.setLanguage(SitePreferences.getLanguage() === 'es' ? 'en' : 'es');
+      applyLanguage();
+    }
+    function toggleTheme() {
+      SitePreferences.setTheme(SitePreferences.getTheme() === 'dark' ? 'light' : 'dark');
+      applyLanguage();
+    }
+    window.addEventListener('sitepreferenceschange', applyLanguage);
+    applyLanguage();
+  </script>
 </body>
 </html>

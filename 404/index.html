@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>404 — Page Not Found | The Fade Room</title>
 <meta name="description" content="The Fade Room — the page you're looking for doesn't exist or has moved.">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="/assets/site-preferences.js"></script>
+<link rel="stylesheet" href="/assets/fonts.css">
 <style>
 /* ===========================================================
    DESIGN SYSTEM — heredado de The Fade Room (barbershop_web)
@@ -38,7 +39,7 @@
 html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);}
 html,body{height:100%;}
 body{
-  font-family:'DM Sans',sans-serif;
+  font-family:'Inter',sans-serif;
   background:var(--cream);color:var(--text-main);
   min-height:100%;overflow-x:hidden;
   transition:background .3s,color .3s;
@@ -72,7 +73,7 @@ a{color:inherit;text-decoration:none;}
 .top-btn{
   background:var(--surface);border:1px solid var(--border-strong);
   border-radius:50px;padding:8px 16px;
-  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;
+  font-family:'Inter',sans-serif;font-size:12px;font-weight:500;
   color:var(--gold);cursor:pointer;
   display:flex;align-items:center;gap:7px;
   transition:all .2s;box-shadow:var(--shadow);letter-spacing:.5px;
@@ -122,7 +123,7 @@ a{color:inherit;text-decoration:none;}
    =========================================================== */
 .btn-primary, .btn-secondary{
   padding:15px 30px;border-radius:50px;
-  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;
+  font-family:'Inter',sans-serif;font-size:12px;font-weight:500;
   letter-spacing:2px;text-transform:uppercase;cursor:pointer;
   transition:all .25s;display:inline-flex;align-items:center;justify-content:center;gap:8px;
   border:1.5px solid transparent;
@@ -144,6 +145,8 @@ a{color:inherit;text-decoration:none;}
   font-style:italic;margin-bottom:6px;
 }
 .footer-copy{font-size:11px;color:var(--text-muted);letter-spacing:1px;}
+.footer-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:10px 0;}
+.footer-links a{font-size:12px;color:var(--text-muted);text-decoration:underline;text-underline-offset:3px;}
 
 @media(min-width:768px){
   .error-hero{padding:80px 32px;}
@@ -155,7 +158,7 @@ a{color:inherit;text-decoration:none;}
 <!-- ============== NAVBAR ============== -->
 <nav class="navbar">
   <a href="/" class="brand" aria-label="The Fade Room" id="brand-link">
-    <img src="../assets/logo-light.png" alt="" width="26" height="26">
+    <img src="/assets/logo-light.png" alt="" width="26" height="26">
     <span>The Fade <em>Room</em></span>
   </a>
   <div class="top-controls">
@@ -175,7 +178,7 @@ a{color:inherit;text-decoration:none;}
   <div class="error-content">
     <span class="studio-tag" id="studio-tag">The Fade Room</span>
 
-    <img class="error-logo" src="../assets/logo-light.png" alt="The Fade Room logo" width="72" height="72">
+    <img class="error-logo" src="/assets/logo-light.png" alt="The Fade Room logo" width="72" height="72">
 
     <h1 class="error-code">4<em>0</em>4</h1>
     <h2 class="error-title" id="error-title">This chair is <em>empty</em></h2>
@@ -184,7 +187,7 @@ a{color:inherit;text-decoration:none;}
 
     <div class="error-ctas">
       <a href="/" class="btn-primary" id="cta-home">Volver al inicio</a>
-      <a href="/?section=contact" class="btn-secondary" id="cta-contact">Contact Us</a>
+      <a href="/?section=location" class="btn-secondary" id="cta-contact">View Location</a>
     </div>
   </div>
 </section>
@@ -192,6 +195,11 @@ a{color:inherit;text-decoration:none;}
 <!-- ============== FOOTER ============== -->
 <footer class="footer">
   <div class="footer-brand">The Fade Room</div>
+  <nav class="footer-links" id="footer-links" aria-label="Legal navigation">
+    <a href="/privacy/" id="privacy-link">Privacy Policy</a>
+    <a href="/terms/" id="terms-link">Terms of Service</a>
+    <a href="/terms/#accessibility" id="accessibility-link">Accessibility</a>
+  </nav>
   <div class="footer-copy" id="footer-copy">© 2026 — Fine Barbering. All rights reserved.</div>
 </footer>
 
@@ -201,35 +209,45 @@ a{color:inherit;text-decoration:none;}
    =========================================================== */
 const T = {
   en: {
+    'document-title':'404 — Page Not Found | The Fade Room',
+    'meta-description':"The Fade Room — the page you're looking for doesn't exist or has moved.",
     'studio-tag':'The Fade Room',
     'error-title':'This chair is <em>empty</em>',
     'error-sub':"The page you're looking for got trimmed off the map. The link may be broken or the address may have changed.",
     'cta-home':'Back to Home',
-    'cta-contact':'Contact Us',
+    'cta-contact':'View Location',
     'lang-label':'EN',
     'theme-label':'Dark',
     'theme-label-dark':'Light',
     'footer-copy':'© 2026 — Fine Barbering. All rights reserved.'
+    ,'privacy-link':'Privacy Policy','terms-link':'Terms of Service','accessibility-link':'Accessibility',
+    'footer-navigation':'Legal navigation','language-aria':'Change language','theme-aria':'Toggle light or dark theme'
   },
   es: {
+    'document-title':'404 — Página no encontrada | The Fade Room',
+    'meta-description':'The Fade Room — la página que buscas no existe o se ha movido.',
     'studio-tag':'The Fade Room',
     'error-title':'Esta silla está <em>vacía</em>',
     'error-sub':'La página que buscas se cortó del mapa. Puede que el enlace esté roto o que la dirección haya cambiado.',
     'cta-home':'Volver al inicio',
-    'cta-contact':'Contáctanos',
+    'cta-contact':'Ver ubicación',
     'lang-label':'ES',
     'theme-label':'Oscuro',
     'theme-label-dark':'Claro',
-    'footer-copy':'© 2026 — Fine Barbering. Todos los derechos reservados.'
+    'footer-copy':'© 2026 — Fine Barbering. Todos los derechos reservados.',
+    'privacy-link':'Política de privacidad','terms-link':'Términos del servicio','accessibility-link':'Accesibilidad',
+    'footer-navigation':'Navegación legal','language-aria':'Cambiar idioma','theme-aria':'Cambiar entre tema claro y oscuro'
   }
 };
 
-let isES = false;
-let isDark = true;
+let isES = SitePreferences.getLanguage() === 'es';
+let isDark = SitePreferences.getTheme() === 'dark';
 
 function t(key){ return (isES ? T.es : T.en)[key] || key; }
 
 function applyLang(){
+  document.title = t('document-title');
+  document.querySelector('meta[name="description"]').content = t('meta-description');
   const ids = ['error-title','error-sub','cta-home','cta-contact','footer-copy'];
   ids.forEach(id => {
     const el = document.getElementById(id);
@@ -240,23 +258,34 @@ function applyLang(){
   document.getElementById('studio-tag').textContent = t('studio-tag');
   document.getElementById('lang-label').textContent = t('lang-label');
   document.getElementById('theme-label').textContent = isDark ? t('theme-label-dark') : t('theme-label');
+  document.getElementById('theme-icon').textContent = isDark ? '☀' : '☽';
+  ['privacy-link','terms-link','accessibility-link'].forEach(id => {
+    document.getElementById(id).textContent = t(id);
+  });
+  document.getElementById('footer-links').setAttribute('aria-label', t('footer-navigation'));
+  document.getElementById('lang-btn').setAttribute('aria-label', t('language-aria'));
+  document.getElementById('theme-btn').setAttribute('aria-label', t('theme-aria'));
   document.documentElement.lang = isES ? 'es' : 'en';
 }
 
-function toggleLang(){ isES = !isES; applyLang(); }
+function toggleLang(){
+  isES = SitePreferences.getLanguage() !== 'es';
+  SitePreferences.setLanguage(isES ? 'es' : 'en');
+  applyLang();
+}
 
 function toggleTheme(){
-  isDark = !isDark;
-  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-  document.getElementById('theme-icon').textContent = isDark ? '☀' : '☽';
-  document.getElementById('theme-label').textContent = isDark ? t('theme-label-dark') : t('theme-label');
+  isDark = SitePreferences.getTheme() !== 'dark';
+  SitePreferences.setTheme(isDark ? 'dark' : 'light');
+  applyLang();
 }
 
+window.addEventListener('sitepreferenceschange', event => {
+  isES = event.detail.language === 'es';
+  isDark = event.detail.theme === 'dark';
+  applyLang();
+});
 applyLang();
-
-if (window.location.pathname !== '/404/') {
-  window.location.replace('/404/');
-}
 </script>
 </body>
 </html>

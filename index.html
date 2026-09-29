@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Fade Room — Fine Barbering · Auburndale, FL</title>
 <meta name="description" content="The Fade Room — premium barbershop in Auburndale, FL. Haircuts, beard trims, full service and kid's cuts. Book your barber today.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="/assets/site-preferences.js"></script>
+<link rel="stylesheet" href="/assets/fonts.css">
 
 <style>
 /* ═══════════════════════════════════════════════════════════════
@@ -318,7 +317,7 @@ main { display: block; }
 .hero-video-fallback {
   position: absolute;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+  background: linear-gradient(135deg, #161209, #2A2013);
   display: none;
 } /* <--- Esta es la llave que faltaba para cerrar el fallback */
 
@@ -925,7 +924,23 @@ main { display: block; }
 [data-theme="light"] .map-wrap iframe {
   filter: grayscale(30%) contrast(1.05);
 }
-
+.map-wrap iframe[hidden], .map-privacy[hidden] { display: none; }
+.map-label[hidden], .map-hide[hidden] { display: none; }
+.map-privacy {
+  position:absolute;inset:0;z-index:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:24px;background:var(--charcoal-2);text-align:center;
+}
+.map-privacy p { max-width:560px;color:var(--off-white-dim);font-size:14px;line-height:1.7; }
+.map-privacy-actions { display:flex;justify-content:center;gap:12px;flex-wrap:wrap; }
+.map-action {
+  display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid var(--gold);border-radius:var(--radius);padding:12px 18px;
+  background:transparent;color:var(--gold);font:500 11px var(--font-sans);
+  letter-spacing:1px;cursor:pointer;
+}
+.map-action:hover { background:var(--gold);color:var(--black); }
+.map-hide { position:absolute;top:18px;right:18px;z-index:3; }
 .map-label {
   position: absolute;
   top: 24px;
@@ -1225,7 +1240,7 @@ main { display: block; }
 <!-- ══════════════════════════════════════════════════════
      NAVBAR
 ══════════════════════════════════════════════════════ -->
-<nav class="navbar" aria-label="Main navigation">
+<nav class="navbar" id="main-navigation" aria-label="Main navigation">
   <div class="nav-left">
     <a href="/" class="brand">
       <!-- REEMPLAZO DEL SVG POR TUS IMÁGENES -->
@@ -1267,11 +1282,11 @@ main { display: block; }
 
 <!-- Full-screen mobile menu -->
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-  <a class="mobile-menu-link" href="/?section=team" data-scroll-to="team" onclick="closeMobileMenu()"><em>Our</em> Team</a>
-  <a class="mobile-menu-link" href="/?section=services" data-scroll-to="services" onclick="closeMobileMenu()">Services</a>
-  <a class="mobile-menu-link" href="/?section=hours" data-scroll-to="hours" onclick="closeMobileMenu()">Hours</a>
-  <a class="mobile-menu-link" href="/?section=contact" data-scroll-to="contact" onclick="closeMobileMenu()">Contact</a>
-  <a class="mobile-menu-link" href="/?section=team" data-scroll-to="team" onclick="closeMobileMenu()"><em>Book</em></a>
+  <a class="mobile-menu-link" href="/?section=team" data-scroll-to="team" onclick="closeMobileMenu()" id="mobile-team-link"><em>Our</em> Team</a>
+  <a class="mobile-menu-link" href="/?section=services" data-scroll-to="services" onclick="closeMobileMenu()" id="mobile-services-link">Services</a>
+  <a class="mobile-menu-link" href="/?section=hours" data-scroll-to="hours" onclick="closeMobileMenu()" id="mobile-hours-link">Hours</a>
+  <a class="mobile-menu-link" href="/?section=contact" data-scroll-to="contact" onclick="closeMobileMenu()" id="mobile-contact-link">Contact</a>
+  <a class="mobile-menu-link" href="/?section=team" data-scroll-to="team" onclick="closeMobileMenu()" id="mobile-book-link"><em>Book</em></a>
   <div class="mobile-menu-footer">
     <button class="nav-btn" onclick="toggleLang()" aria-label="Change language">
       <span id="mobile-lang-label">ES</span>
@@ -1290,16 +1305,9 @@ main { display: block; }
 <section class="hero" id="home">
   <div class="hero-video-wrap">
     <div class="hero-video-fallback"></div>
-    <!--
-      VIDEO PLACEHOLDER — replace src with your video
-      Recommended: compressed MP4, 1920x1080, under 8 MB
-      Free stock: https://www.pexels.com/search/videos/barbershop/
-    -->
-    <video class="hero-video" autoplay muted loop playsinline preload="metadata"
-  poster="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=80"
-  aria-hidden="true">
-    <source src="https://thefaderoom.ayevdigital.com/assets/video/hero-mobile.webm" type="video/webm" media="(max-width: 768px)">
-    <source src="https://thefaderoom.ayevdigital.com/assets/video/hero-desktop.webm" type="video/webm">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+      <source src="assets/video/hero-mobile.webm" type="video/webm" media="(max-width: 768px)">
+      <source src="assets/video/hero-desktop.webm" type="video/webm">
     </video>
   </div>
 
@@ -1319,7 +1327,7 @@ main { display: block; }
         </svg>
         <span id="cta-book-text">Book an Appointment</span>
       </button>
-      <button class="btn-secondary" onclick="smoothScrollTo('contact')" id="cta-contact">
+      <button class="btn-secondary" onclick="smoothScrollTo('location')" id="cta-contact">
         <svg viewBox="0 0 18 18" fill="none" width="16" height="16" aria-hidden="true">
           <path d="M15 3H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h3l2 2 2-2h5a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
         </svg>
@@ -1389,21 +1397,22 @@ main { display: block; }
 ══════════════════════════════════════════════════════ -->
 <div class="map-section" id="location">
   <div class="map-wrap">
-    <!--
-      MAP PLACEHOLDER — replace iframe src with your Google Maps embed
-      How to get it:
-        1. Go to maps.google.com and search "The Fade Room Auburndale FL"
-        2. Click "Share" → "Embed a map"
-        3. Copy the full iframe src and paste it below
-    -->
+    <div class="map-privacy" id="map-placeholder">
+      <p id="map-note">Google Maps stays unloaded until you ask to display it. When loaded, Google may receive technical request information such as your IP address and browser headers.</p>
+      <div class="map-privacy-actions">
+        <button class="map-action" type="button" id="map-load" onclick="loadGoogleMap()" aria-controls="location-map" aria-expanded="false">Load map from Google</button>
+        <a class="map-action" id="map-open" href="https://maps.google.com/?q=The+Fade+Room+Auburndale+FL" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+      </div>
+    </div>
+    <button class="map-action map-hide" type="button" id="map-hide" onclick="hideGoogleMap()" hidden>Hide map</button>
     <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3519.342!2d-81.7923!3d28.0664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDAzJzU5LjAiTiA4McKwNDcnMzIuMyJX!5e0!3m2!1sen!2sus!4v1234567890"
-      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-      title="The Fade Room location">
+      data-src="https://www.google.com/maps?q=The+Fade+Room+Auburndale+FL&amp;output=embed"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer"
+      title="The Fade Room location" id="location-map" hidden>
     </iframe>
-    <div class="map-label">
+    <div class="map-label" id="map-label" hidden>
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s8-7.58 8-13a8 8 0 1 0-16 0c0 5.42 8 13 8 13z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
-      The Fade Room · Auburndale, FL
+      <span id="map-label-text">The Fade Room · Auburndale, FL</span>
     </div>
   </div>
 </div>
@@ -1418,34 +1427,34 @@ main { display: block; }
     <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
   </div>
   <div class="bento-grid reveal">
-    <a class="bento-card" href="https://maps.google.com/?q=The+Fade+Room+Auburndale+FL" target="_blank" rel="noopener">
+    <a class="bento-card" href="https://maps.google.com/?q=The+Fade+Room+Auburndale+FL" target="_blank" rel="noopener noreferrer">
       <div class="bento-icon">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s8-7.58 8-13a8 8 0 1 0-16 0c0 5.42 8 13 8 13z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
       </div>
       <span class="bento-label" id="lbl-location">Location</span>
       <span class="bento-value" id="val-location">Auburndale, FL</span>
     </a>
-    <a class="bento-card" href="https://search.google.com/local/writereview?placeid=YOUR_GOOGLE_PLACE_ID" target="_blank" rel="noopener">
+    <div class="bento-card">
       <div class="bento-icon">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l3 6.5 7 .8-5.2 4.7L18.5 22 12 18.3 5.5 22 7.2 14l-5.2-4.7 7-.8L12 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
       </div>
       <span class="bento-label" id="lbl-reviews">Reviews</span>
-      <span class="bento-value" id="val-reviews">Google Reviews</span>
-    </a>
-    <a class="bento-card" href="tel:+15550000000">
+      <span class="bento-value" id="val-reviews">Review link pending confirmation</span>
+    </div>
+    <div class="bento-card">
       <div class="bento-icon">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6.4 6.4l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
       </div>
       <span class="bento-label" id="lbl-phone">Phone</span>
-      <span class="bento-value" id="val-phone">+1 (555) 000-0000</span>
-    </a>
-    <a class="bento-card" href="mailto:hello@thefaderoom.com">
+      <span class="bento-value" id="val-phone">Contact information pending confirmation</span>
+    </div>
+    <div class="bento-card">
       <div class="bento-icon">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </div>
       <span class="bento-label" id="lbl-email">Email</span>
-      <span class="bento-value" id="val-email">hello@thefaderoom.com</span>
-    </a>
+      <span class="bento-value" id="val-email">Contact information pending confirmation</span>
+    </div>
   </div>
 </section>
 
@@ -1472,9 +1481,9 @@ main { display: block; }
 
   <div class="footer-divider"></div>
   <div class="footer-legal">
-    <a class="footer-legal-link" href="privacy.html" id="fl-privacy">Privacy Policy</a>
-    <a class="footer-legal-link" href="terms.html" id="fl-terms">Terms of Service</a>
-    <a class="footer-legal-link" href="/terms/" id="fl-access">Accessibility</a>
+    <a class="footer-legal-link" href="/privacy/" id="fl-privacy">Privacy Policy</a>
+    <a class="footer-legal-link" href="/terms/" id="fl-terms">Terms of Service</a>
+    <a class="footer-legal-link" href="/terms/#accessibility" id="fl-access">Accessibility</a>
   </div>
 
   <div class="footer-copy" id="footer-copy">© 2026 The Fade Room — Fine Barbering · Auburndale, FL. All rights reserved.</div>
@@ -1489,57 +1498,46 @@ main { display: block; }
    CONFIG — Edit only this block
 ═══════════════════════════════════════════════════════════ */
 
-const barberLinks = {
-  barber1: 'https://booking.example.com/barber1',
-  barber2: 'https://booking.example.com/barber2',
-  barber3: 'https://booking.example.com/barber3',
-  barber4: 'https://booking.example.com/barber4',
-  barber5: 'https://booking.example.com/barber5',
-  barber6: 'https://booking.example.com/barber6',
-  barber7: 'https://booking.example.com/barber7',
-  barber8: 'https://booking.example.com/barber8',
-};
-
 const barbers = [
   {
     id:'barber1', name:'Marcus King',
     specKey:'spec-master', descKey:'desc-master',
-    photo:'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=400&q=80',
+    photo:'assets/barber-photo-1.jpg',
   },
   {
     id:'barber2', name:'Diego Romero',
     specKey:'spec-beard', descKey:'desc-beard',
-    photo:'https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=400&q=80',
+    photo:'assets/barber-photo-2.jpg',
   },
   {
     id:'barber3', name:'Ethan Cole',
     specKey:'spec-fade', descKey:'desc-fade',
-    photo:'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=400&q=80',
+    photo:'assets/barber-photo-3.jpg',
   },
   {
     id:'barber4', name:'Liam Foster',
     specKey:'spec-classic', descKey:'desc-classic',
-    photo:'https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=400&q=80',
+    photo:'assets/barber-photo-2.jpg',
   },
   {
     id:'barber5', name:'Marcus King',
     specKey:'spec-master', descKey:'desc-master',
-    photo:'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=400&q=80',
+    photo:'assets/barber-photo-1.jpg',
   },
   {
     id:'barber6', name:'Diego Romero',
     specKey:'spec-beard', descKey:'desc-beard',
-    photo:'https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=400&q=80',
+    photo:'assets/barber-photo-2.jpg',
   },
   {
     id:'barber7', name:'Ethan Cole',
     specKey:'spec-fade', descKey:'desc-fade',
-    photo:'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=400&q=80',
+    photo:'assets/barber-photo-3.jpg',
   },
   {
     id:'barber8', name:'Liam Foster',
     specKey:'spec-classic', descKey:'desc-classic',
-    photo:'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=400&q=80',
+    photo:'assets/barber-photo-1.jpg',
   },
 ];
 
@@ -1548,25 +1546,25 @@ const services = [
     key:'haircut', price:'$35',
     nameKey:'svc-haircut', descKey:'svc-haircut-desc',
     icon: 'assets/icon-haircut.png',
-    iconAlt: 'Haircut icon',
+    iconAltKey: 'icon-haircut',
   },
   {
     key:'beard', price:'$20',
     nameKey:'svc-beard', descKey:'svc-beard-desc',
     icon: 'assets/icon-beard.png',
-    iconAlt: 'Beard trim icon',
+    iconAltKey: 'icon-beard',
   },
   {
     key:'full', price:'$50',
     nameKey:'svc-full', descKey:'svc-full-desc',
     icon: 'assets/icon-full-service.png',
-    iconAlt: 'Full service icon',
+    iconAltKey: 'icon-full',
   },
   {
     key:'kids', price:'$25',
     nameKey:'svc-kids', descKey:'svc-kids-desc',
     icon: 'assets/icon-kids.png',
-    iconAlt: "Kid's haircut icon",
+    iconAltKey: 'icon-kids',
   },
 ];
 
@@ -1585,23 +1583,36 @@ const hours = [
 ═══════════════════════════════════════════════════════════ */
 const T = {
   en: {
-    'lang-label':'ES','theme-label':'Light','theme-label-dark':'Light',
+    'lang-label':'ES','theme-label':'Dark','theme-label-dark':'Light',
+    'document-title':'The Fade Room — Fine Barbering · Auburndale, FL',
+    'meta-description':"The Fade Room — premium barbershop in Auburndale, FL. Haircuts, beard trims, full service and kid's cuts. Booking links are not yet available.",
+    'language-aria':'Change language','theme-aria':'Toggle light or dark theme',
+    'main-navigation':'Main navigation','menu-open':'Open menu','menu-close':'Close menu',
+    'scroll-aria':'Scroll to team section','map-title':'The Fade Room location',
+    'map-note':'Google Maps stays unloaded until you ask to display it. When loaded, Google may receive technical request information such as your IP address and browser headers.',
+    'map-load':'Load map from Google','map-open':'Open in Google Maps','map-hide':'Hide map',
+    'map-label-text':'The Fade Room · Auburndale, FL',
+    'mobile-team-link':'<em>Our</em> Team','mobile-services-link':'Services',
+    'mobile-hours-link':'Hours','mobile-contact-link':'Contact','mobile-book-link':'<em>Barbers</em>',
+    'booking-unavailable':'Online booking is not available yet. Please check back later.',
     'hero-eyebrow':'The Fade Room · Auburndale, FL',
     'hero-title':'The Art<br>of the<br><em>Fade.</em>',
     'hero-sub':'Precision cuts, hot towel shaves and timeless grooming, crafted by master barbers in an atmosphere built for gentlemen.',
-    'cta-book-text':'Book an Appointment',
-    'cta-contact-text':'Contact Us',
-    'nav-book-text':'Book an Appointment','nav-book-text-short':'Book',
+    'cta-book-text':'Meet our barbers',
+    'cta-contact-text':'View Location',
+    'nav-book-text':'Meet our barbers','nav-book-text-short':'Barbers',
     'scroll-label':'Scroll',
     'team-tag':'Our Team','team-title':'Meet your <em>barber</em>',
-    'team-sub':'Each barber brings a distinct style. Choose yours and book directly.',
+    'team-sub':'Each barber brings a distinct style. Online booking is not available yet.',
     'spec-master':'Master Barber','spec-beard':'Beard Specialist',
     'spec-fade':'Fade Expert','spec-classic':'Classic Cuts',
     'desc-master':'Master of clean lines and skin fades. 8+ years crafting precision cuts that turn heads.',
     'desc-beard':'Beard specialist and texture expert. Hot-towel shaves and sculpted beards are his signature.',
     'desc-fade':'From textured crops to sharp fades, Ethan brings precision to every cut.',
     'desc-classic':"Patient, detail-oriented and the shop's go-to for classic cuts and first-timers.",
-    'book-with':'Book with',
+    'book-with':'Booking unavailable',
+    'icon-haircut':'Haircut icon','icon-beard':'Beard trim icon',
+    'icon-full':'Full service icon','icon-kids':"Kid's haircut icon",
     'svc-tag':'Services','svc-title':'Services &amp; <em>prices</em>',
     'svc-sub':'Straightforward pricing. No surprises — just clean work, every time.',
     'svc-haircut':'Haircut','svc-haircut-desc':'Classic cut, washed and styled to perfection.',
@@ -1614,32 +1625,45 @@ const T = {
     'today-badge':'Today',
     'contact-tag':'Visit Us','contact-title':'Find your <em>chair</em>',
     'lbl-location':'Location','val-location':'Auburndale, FL',
-    'lbl-reviews':'Reviews','val-reviews':'Google Reviews',
-    'lbl-phone':'Phone','val-phone':'+1 (555) 000-0000',
-    'lbl-email':'Email','val-email':'hello@thefaderoom.com',
+    'lbl-reviews':'Reviews','val-reviews':'Review link pending confirmation',
+    'lbl-phone':'Phone','val-phone':'Contact information pending confirmation',
+    'lbl-email':'Email','val-email':'Contact information pending confirmation',
     'fl-team':'Team','fl-svc':'Services','fl-hours':'Hours','fl-contact':'Contact',
     'fl-privacy':'Privacy Policy','fl-terms':'Terms of Service','fl-access':'Accessibility',
     'footer-copy':'© 2026 The Fade Room — Fine Barbering · Auburndale, FL. All rights reserved.',
     'nav-team':'Team','nav-svc':'Services','nav-hours':'Hours','nav-contact':'Contact',
   },
   es: {
-    'lang-label':'EN','theme-label':'Claro','theme-label-dark':'Claro',
+    'lang-label':'EN','theme-label':'Oscuro','theme-label-dark':'Claro',
+    'document-title':'The Fade Room — Barbería fina · Auburndale, FL',
+    'meta-description':'The Fade Room — barbería en Auburndale, Florida. Cortes de cabello, barba y servicio completo. Los enlaces de reserva aún no están disponibles.',
+    'language-aria':'Cambiar idioma','theme-aria':'Cambiar entre tema claro y oscuro',
+    'main-navigation':'Navegación principal','menu-open':'Abrir menú','menu-close':'Cerrar menú',
+    'scroll-aria':'Desplazarse hasta la sección del equipo','map-title':'Ubicación de The Fade Room',
+    'map-note':'Google Maps permanece sin cargar hasta que solicites verlo. Al cargarlo, Google puede recibir información técnica como tu dirección IP y encabezados del navegador.',
+    'map-load':'Cargar mapa de Google','map-open':'Abrir en Google Maps','map-hide':'Ocultar mapa',
+    'map-label-text':'The Fade Room · Auburndale, FL',
+    'mobile-team-link':'<em>Nuestro</em> equipo','mobile-services-link':'Servicios',
+    'mobile-hours-link':'Horario','mobile-contact-link':'Contacto','mobile-book-link':'<em>Barberos</em>',
+    'booking-unavailable':'Las reservas en línea aún no están disponibles. Vuelve a consultar más adelante.',
     'hero-eyebrow':'The Fade Room · Auburndale, FL',
     'hero-title':'El Arte<br>del<br><em>Fade.</em>',
     'hero-sub':'Cortes de precisión, afeitados con toalla caliente y cuidado atemporal — creados por barberos maestros en un ambiente hecho para caballeros.',
-    'cta-book-text':'Reservar una Cita',
-    'cta-contact-text':'Contáctanos',
-    'nav-book-text':'Reservar una Cita','nav-book-text-short':'Reservar',
+    'cta-book-text':'Ver barberos',
+    'cta-contact-text':'Ver ubicación',
+    'nav-book-text':'Ver barberos','nav-book-text-short':'Barberos',
     'scroll-label':'Ver más',
     'team-tag':'Nuestro Equipo','team-title':'Conoce a tu <em>barbero</em>',
-    'team-sub':'Cada barbero tiene su propio estilo. Elige el tuyo y reserva directamente.',
+    'team-sub':'Cada barbero tiene su propio estilo. Las reservas en línea aún no están disponibles.',
     'spec-master':'Barbero Maestro','spec-beard':'Especialista en Barba',
     'spec-fade':'Experto en Fade','spec-classic':'Cortes Clásicos',
     'desc-master':'Maestro de líneas limpias y fades al ras. Más de 8 años creando cortes de precisión.',
     'desc-beard':'Especialista en barba y textura. Los afeitados con toalla caliente son su firma.',
     'desc-fade':'De cortes texturizados a fades nítidos, Ethan lleva la precisión a cada corte.',
     'desc-classic':'Paciente, detallista y el favorito de la barbería para cortes clásicos y primerizos.',
-    'book-with':'Reservar con',
+    'book-with':'Reservas no disponibles',
+    'icon-haircut':'Icono de corte de cabello','icon-beard':'Icono de recorte de barba',
+    'icon-full':'Icono de servicio completo','icon-kids':'Icono de corte infantil',
     'svc-tag':'Servicios','svc-title':'Servicios y <em>precios</em>',
     'svc-sub':'Precios claros. Sin sorpresas — solo trabajo limpio, siempre.',
     'svc-haircut':'Corte de Cabello','svc-haircut-desc':'Corte clásico, lavado y peinado a la perfección.',
@@ -1652,9 +1676,9 @@ const T = {
     'today-badge':'Hoy',
     'contact-tag':'Visítanos','contact-title':'Encuentra tu <em>silla</em>',
     'lbl-location':'Ubicación','val-location':'Auburndale, FL',
-    'lbl-reviews':'Reseñas','val-reviews':'Reseñas de Google',
-    'lbl-phone':'Teléfono','val-phone':'+1 (555) 000-0000',
-    'lbl-email':'Correo','val-email':'hello@thefaderoom.com',
+    'lbl-reviews':'Reseñas','val-reviews':'Enlace de reseñas pendiente de confirmar',
+    'lbl-phone':'Teléfono','val-phone':'Datos de contacto pendientes de confirmar',
+    'lbl-email':'Correo','val-email':'Datos de contacto pendientes de confirmar',
     'fl-team':'Equipo','fl-svc':'Servicios','fl-hours':'Horario','fl-contact':'Contacto',
     'fl-privacy':'Política de Privacidad','fl-terms':'Términos de Servicio','fl-access':'Accesibilidad',
     'footer-copy':'© 2026 The Fade Room — Barbería Fina · Auburndale, FL. Todos los derechos reservados.',
@@ -1665,8 +1689,8 @@ const T = {
 /* ═══════════════════════════════════════════════════════════
    STATE
 ═══════════════════════════════════════════════════════════ */
-let isES   = false;
-let isDark = true;
+let isES   = SitePreferences.getLanguage() === 'es';
+let isDark = SitePreferences.getTheme() === 'dark';
 function t(key){ return (isES ? T.es : T.en)[key] ?? key; }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1682,9 +1706,8 @@ function renderBarbers(){
           role="img" aria-label="${b.name}">
         </div>
         <div class="barber-overlay">
-          <button class="btn-book"
-            onclick="bookBarber('${b.id}')">
-            <span data-i18n-book>${t('book-with')}</span> ${b.name.split(' ')[0]}
+          <button class="btn-book" onclick="bookingUnavailable()">
+            <span data-i18n-book>${t('book-with')}</span>
           </button>
         </div>
       </div>
@@ -1706,7 +1729,8 @@ function renderServices(){
         <img
           class="service-icon"
           src="${s.icon}"
-          alt="${s.iconAlt}"
+          alt="${t(s.iconAltKey)}"
+          data-i18n-alt="${s.iconAltKey}"
           width="28" height="28"
           onerror="this.parentElement.style.display='none'">
       </div>
@@ -1747,12 +1771,26 @@ function renderHours(){
 /* ═══════════════════════════════════════════════════════════
    ACTIONS
 ═══════════════════════════════════════════════════════════ */
-function bookBarber(id){
-  const url = barberLinks[id];
-  if(url && !url.includes('example.com'))
-    window.open(url, '_blank', 'noopener,noreferrer');
-  else
-    alert('Booking link coming soon — contact us directly!');
+function bookingUnavailable(){ alert(t('booking-unavailable')); }
+
+function loadGoogleMap(){
+  const map = document.getElementById('location-map');
+  map.src = map.dataset.src;
+  map.hidden = false;
+  document.getElementById('map-load').setAttribute('aria-expanded', 'true');
+  document.getElementById('map-placeholder').hidden = true;
+  document.getElementById('map-label').hidden = false;
+  document.getElementById('map-hide').hidden = false;
+}
+
+function hideGoogleMap(){
+  const map = document.getElementById('location-map');
+  map.removeAttribute('src');
+  map.hidden = true;
+  document.getElementById('map-load').setAttribute('aria-expanded', 'false');
+  document.getElementById('map-placeholder').hidden = false;
+  document.getElementById('map-label').hidden = true;
+  document.getElementById('map-hide').hidden = true;
 }
 
 let scrollAnimFrame = null;
@@ -1819,6 +1857,7 @@ function openMobileMenu(){
   mobileMenu.classList.add('open');
   mobileMenu.setAttribute('aria-hidden', 'false');
   hamburger.setAttribute('aria-expanded', 'true');
+  hamburger.setAttribute('aria-label', t('menu-close'));
   document.body.style.overflow = 'hidden';
 }
 function closeMobileMenu(){
@@ -1826,6 +1865,7 @@ function closeMobileMenu(){
   mobileMenu.classList.remove('open');
   mobileMenu.setAttribute('aria-hidden', 'true');
   hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.setAttribute('aria-label', t('menu-open'));
   document.body.style.overflow = '';
 }
 hamburger.addEventListener('click', () => {
@@ -1845,6 +1885,8 @@ window.addEventListener('scroll', () => {
 ═══════════════════════════════════════════════════════════ */
 function applyLang(){
   const lang = isES ? T.es : T.en;
+  document.title = lang['document-title'];
+  document.querySelector('meta[name="description"]').content = lang['meta-description'];
 
   ['hero-title','team-title','svc-title','contact-title','hours-title'].forEach(id => {
     const el = document.getElementById(id);
@@ -1860,6 +1902,8 @@ function applyLang(){
     'fl-privacy','fl-terms','fl-access',
     'footer-copy','lang-label',
     'nav-team','nav-svc','nav-hours','nav-contact',
+    'mobile-team-link','mobile-services-link','mobile-hours-link','mobile-contact-link','mobile-book-link',
+    'map-note','map-load','map-open','map-hide','map-label-text',
   ];
   ids.forEach(id => {
     const el = document.getElementById(id);
@@ -1874,9 +1918,24 @@ function applyLang(){
     if(k && lang[k] !== undefined) el.textContent = lang[k];
   });
   document.querySelectorAll('[data-i18n-book]').forEach(el => el.textContent = t('book-with'));
+  document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+    const key = el.getAttribute('data-i18n-alt');
+    if(key && lang[key] !== undefined) el.setAttribute('alt', lang[key]);
+  });
 
   document.getElementById('theme-label').textContent =
     isDark ? t('theme-label-dark') : t('theme-label');
+  document.getElementById('theme-icon').textContent = isDark ? '☀' : '☽';
+  document.querySelectorAll('button[onclick="toggleLang()"]').forEach(el => {
+    el.setAttribute('aria-label', lang['language-aria']);
+  });
+  document.querySelectorAll('button[onclick="toggleTheme()"]').forEach(el => {
+    el.setAttribute('aria-label', lang['theme-aria']);
+  });
+  document.getElementById('main-navigation').setAttribute('aria-label', lang['main-navigation']);
+  hamburger.setAttribute('aria-label', mobileMenu.classList.contains('open') ? lang['menu-close'] : lang['menu-open']);
+  document.querySelector('.hero-scroll').setAttribute('aria-label', lang['scroll-aria']);
+  document.getElementById('location-map').title = lang['map-title'];
 
   const mobileLang = document.getElementById('mobile-lang-label');
   const mobileTheme = document.getElementById('mobile-theme-label');
@@ -1887,17 +1946,27 @@ function applyLang(){
   document.documentElement.lang = isES ? 'es' : 'en';
 }
 
-function toggleLang(){ isES = !isES; applyLang(); }
+function toggleLang(){
+  isES = SitePreferences.getLanguage() !== 'es';
+  SitePreferences.setLanguage(isES ? 'es' : 'en');
+  applyLang();
+}
 
 function toggleTheme(){
-  isDark = !isDark;
-  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  isDark = SitePreferences.getTheme() !== 'dark';
+  SitePreferences.setTheme(isDark ? 'dark' : 'light');
   document.getElementById('theme-icon').textContent = isDark ? '☀' : '☽';
   document.getElementById('theme-label').textContent =
     isDark ? t('theme-label-dark') : t('theme-label');
   const mobileTheme = document.getElementById('mobile-theme-label');
   if(mobileTheme) mobileTheme.textContent = isDark ? t('theme-label-dark') : t('theme-label');
 }
+
+window.addEventListener('sitepreferenceschange', event => {
+  isES = event.detail.language === 'es';
+  isDark = event.detail.theme === 'dark';
+  applyLang();
+});
 
 /* ═══════════════════════════════════════════════════════════
    SCROLL REVEAL

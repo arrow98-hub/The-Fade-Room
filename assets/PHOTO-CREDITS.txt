@@ -1,0 +1,11 @@
+Photographs in barber-photo-1.jpg, barber-photo-2.jpg, and barber-photo-3.jpg
+were sourced from Unsplash and downloaded for local hosting:
+
+- photo-1622286342621-4bd786c2447c
+- photo-1605497788044-5a32c7078486
+- photo-1599351431202-1e0f0137899a
+
+Unsplash License: https://unsplash.com/license
+The Unsplash License does not require attribution; this file records the
+source for asset provenance. The photo subjects are not verified business
+staff.
